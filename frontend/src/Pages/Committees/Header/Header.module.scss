@@ -1,0 +1,9 @@
+@layer component {
+    .Header {
+        height: 100%;
+        background: var(--color-navbar-bg);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}

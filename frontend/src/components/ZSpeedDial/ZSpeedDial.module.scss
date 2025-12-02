@@ -1,0 +1,62 @@
+@layer Base {
+    .Button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        border: none;
+        color: white;
+
+        @media (hover: hover) {
+            &:hover {
+                background-color: var(--color-gray-100);
+            }
+        }
+
+        &:active {
+            background-color: var(--color-gray-100);
+        }
+
+        &[data-popup-open] {
+            background-color: var(--color-gray-100);
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--color-blue);
+            outline-offset: -1px;
+        }
+    }
+
+    .Positioner {
+        outline: 0;
+    }
+
+    .Popup {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        color: var(--color-gray-900);
+        transform-origin: var(--transform-origin);
+        transition:
+            transform 150ms,
+            opacity 150ms;
+
+        &[data-starting-style],
+        &[data-ending-style] {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+    }
+
+    .Item {
+        display: flex;
+        border-radius: 50%;
+
+        &[data-highlighted] {
+            z-index: 0;
+            position: relative;
+        }
+    }
+}

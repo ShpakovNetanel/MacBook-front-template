@@ -1,0 +1,12 @@
+.Page {
+    width: 100vw;
+    height: 100vh;
+}
+
+.Header {
+    height: 3.75rem;
+}
+
+.Content {
+    height: calc(100% - 3.75rem);
+}

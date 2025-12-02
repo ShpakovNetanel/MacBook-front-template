@@ -1,0 +1,19 @@
+@layer component {
+    .Input {
+        width: 22vw;
+    }
+    
+    .Container {
+        background: rgb(216, 216, 216, 0.3);
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+    }
+
+    .Plus {
+        background-color: lightgreen;
+        border: none;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        height: 2rem;
+    }
+}
