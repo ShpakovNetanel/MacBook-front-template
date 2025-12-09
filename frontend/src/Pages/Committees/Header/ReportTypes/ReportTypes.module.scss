@@ -18,10 +18,4 @@
     .Indicator {
         font-size: 0.7rem;
     }
-
-    .Connector {
-        &[data-active] {
-            color: blue;
-        }
-    }   
 }

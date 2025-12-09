@@ -20,7 +20,7 @@ export const ReportTypes = () => {
     return (
         <ZStepper defaultActive={0} orientation="horizontal">
             {steps.map((step, index) => (
-                <ZStep key={index} index={index}>
+                <ZStep disabled={index === 2} key={index} index={index}>
                     <ZStepIndicator
                         slotProps={{
                             completedIcon: <Check className={styles.Indicator} />,

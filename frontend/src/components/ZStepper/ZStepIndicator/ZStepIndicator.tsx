@@ -19,15 +19,15 @@ type ZStepIndicatorProps = {
 
 export const ZStepIndicator = ({ slotProps }: ZStepIndicatorProps) => {
     const { stepIndex, state } = useStep();
-    console.log({ state, stepIndex });
 
     return (
         <div
             className={clsx(styles.Indicator, slotProps?.classes?.Indicator)}
-            data-active={state === 'active'}
-            data-completed={state === 'completed'}>
+            data-active={state === 'active' || undefined}
+            data-completed={state === 'completed' || undefined}
+            data-disabled={state === 'disabled' || undefined}>
             {state === 'completed'
-                ? slotProps?.completedIcon ?? <Check />
+                ? slotProps?.completedIcon ?? <Check size={2} />
                 : stepIndex}
         </div>
     );

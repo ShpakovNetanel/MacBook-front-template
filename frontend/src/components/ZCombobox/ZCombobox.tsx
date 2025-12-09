@@ -108,7 +108,13 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 					: <Combobox.Input
 						placeholder={placeholder}
 						id={id}
-						className={clsx(styles.Input, slotProps?.classes?.Input)} />}
+						className={clsx(styles.Input, slotProps?.classes?.Input)}>
+						<div className={styles.ActionButtons}>
+							<Combobox.Clear className={styles.Clear} aria-label="Clear selection">
+								<X className={styles.ClearIcon} />
+							</Combobox.Clear>
+						</div>
+					</Combobox.Input>}
 			</div>
 
 			<Combobox.Portal>
@@ -116,7 +122,7 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 					className={clsx(styles.Positioner, slotProps?.classes?.Positioner)}
 					sideOffset={4}
 					anchor={containerRef}>
-					<Combobox.Popup  className={clsx(styles.Popup, slotProps?.classes?.Popup)}>
+					<Combobox.Popup className={clsx(styles.Popup, slotProps?.classes?.Popup)}>
 						{!slotProps?.disable?.emptyLabel &&
 							<Combobox.Empty className={clsx(styles.Empty, slotProps?.classes?.Empty)}>
 								{emptyLabel}

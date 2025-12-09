@@ -16,9 +16,8 @@ type ZStepConnectorProps = {
 export const ZStepConnector = ({ slotProps }: ZStepConnectorProps) => {
     const { state } = useStep();
 
-    return <div
-        className={clsx(styles.Connector, slotProps?.classes?.Connector)}
-        data-active={state === 'active'}
-        data-completed={state === 'completed'}
-        data-disabled={state === 'disabled'} />;
+    return <div className={clsx(styles.Connector, slotProps?.classes?.Connector)}
+        data-active={state === 'active' || undefined}
+        data-completed={state === 'completed' || undefined}
+        data-disabled={state === 'disabled' || undefined} />;
 };

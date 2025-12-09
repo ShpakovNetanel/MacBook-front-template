@@ -2,6 +2,7 @@ import clsx from "clsx";
 import type { PropsWithChildren } from "react";
 import { useStep } from "../ZStepProvider/ZStepProvider";
 import styles from "./ZStepLabel.module.scss";
+import { useStepper } from "../ZStepperProvider/ZStepperProvider";
 
 type Classes = {
     Label?: keyof typeof styles;
@@ -20,8 +21,9 @@ export const ZStepLabel = ({ children, slotProps }: ZStepLabelProps) => {
 
     return <div
         className={clsx(styles.Label, slotProps?.classes?.Label)}
-        data-active={state === 'active'}
-        data-completed={state === 'completed'}>
+        data-active={state === 'active' || undefined}
+        data-completed={state === 'completed' || undefined}
+        data-disabled={state === 'disabled'}>
         {children}
     </div>;
 };

@@ -14,11 +14,11 @@ type SlotProps = {
     classes?: Classes;
 }
 
-export type ZStepProps = PropsWithChildren<{
+export type ZStepProps = PropsWithChildren & {
     index: number;
     disabled?: boolean;
     slotProps?: SlotProps;
-}>;
+};
 
 export const ZStep = ({ index, disabled, children, slotProps }: ZStepProps) => {
     const { active, setActive } = useStepper();
