@@ -10,12 +10,12 @@ export type SpeedDialItem = {
 type ZSpeedDialProps = {
     items: SpeedDialItem[];
     trigger: React.ReactNode;
-};
+} & Menu.Root.Props;
 
-export const ZSpeedDial = ({ items, trigger }: ZSpeedDialProps) => {
+export const ZSpeedDial = ({ items, trigger, ...props }: ZSpeedDialProps) => {
     return (
-        <Menu.Root openOnHover>
-            <Menu.Trigger className={styles.Button}>
+        <Menu.Root {...props}>
+            <Menu.Trigger className={styles.Button} openOnHover>
                 {trigger}
             </Menu.Trigger>
             <Menu.Portal>

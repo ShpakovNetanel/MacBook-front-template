@@ -1,15 +1,16 @@
 import { Dialog } from "@base-ui-components/react";
+import clsx from "clsx";
+import { Menu } from "lucide-react";
 import type { PropsWithChildren, ReactNode } from "react";
 import styles from "./ZDrawer.module.scss";
-import clsx from "clsx";
 
 type Direction = "left" | "right" | "top" | "bottom";
 const XAxios = ['left', 'right'];
 const YAxios = ['top', 'bottom'];
 
 type Classes = {
-    trigger?: keyof typeof styles;
-    drawer?: keyof typeof styles;
+    Trigger?: keyof typeof styles;
+    Drawer?: keyof typeof styles;
 }
 
 type SlotProps = {
@@ -20,23 +21,17 @@ type SlotProps = {
 }
 
 type ZDrawerProps = {
-    open: boolean;
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-    trigger: ReactNode;
+    triggerIcon?: ReactNode;
     slotProps?: SlotProps;
-} & PropsWithChildren;
+} & PropsWithChildren
+    & Dialog.Root.Props;
 
 export const ZDrawer = ({
-    open,
-    setIsOpen,
     children,
-    trigger,
-    slotProps
+    triggerIcon,
+    slotProps,
+    ...props
 }: ZDrawerProps) => {
-    const triggerOpen = () => {
-        setIsOpen(prevState => !prevState);
-    }
-
     const direction = slotProps?.direction ?? 'right';
 
     const width: string = slotProps?.width ?
@@ -52,18 +47,18 @@ export const ZDrawer = ({
             '100%';
 
     return (
-        <Dialog.Root open={open} onOpenChange={triggerOpen}>
-            <Dialog.Trigger className={clsx(styles.Trigger, slotProps?.classes?.trigger)}>
-                {trigger}
+        <Dialog.Root {...props}>
+            <Dialog.Trigger className={clsx(styles.Trigger, slotProps?.classes?.Trigger)}>
+                {triggerIcon ?? <Menu />}
             </Dialog.Trigger>
-            <Dialog.Backdrop
-                className={`${styles.backdrop} ${open ? styles.open : ""}`}
-                onClick={triggerOpen} />
-            <div
-                className={`${clsx(styles.drawer, slotProps?.classes?.drawer)} ${styles[direction]} ${open ? styles.open : ""}`}
-                style={{ height, width }}>
-                {children}
-            </div>
+            <Dialog.Portal>
+                <Dialog.Backdrop
+                    className={styles.Backdrop} />
+                <Dialog.Popup className={clsx(styles.Drawer, slotProps?.classes?.Drawer, styles[direction])}
+                    style={{ width, height }}>
+                    {children}
+                </Dialog.Popup>
+            </Dialog.Portal>
         </Dialog.Root>
     );
 };

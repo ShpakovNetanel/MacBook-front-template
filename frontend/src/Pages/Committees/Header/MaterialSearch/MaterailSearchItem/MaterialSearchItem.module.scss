@@ -11,4 +11,13 @@
         display: flex;
         flex-direction: column;
     }
+
+    .Button {
+        background-color: transparent;
+        border: none;
+    }
+
+    .Icon {
+        color: rgba(192, 61, 127, 0.8);
+    }
 }

@@ -25,7 +25,7 @@ type ZToastProps = {
 
 export const ZToastBase = ({ slotProps, description, title }: ZToastProps) => {
     return (
-        <Toast.Provider timeout={slotProps?.timeout ?? 2000}>
+        <>
             <ZToastButton
                 title={title}
                 description={description}
@@ -35,6 +35,6 @@ export const ZToastBase = ({ slotProps, description, title }: ZToastProps) => {
                     <ZToastList slotProps={slotProps?.ZToastList} />
                 </Toast.Viewport>
             </Toast.Portal>
-        </Toast.Provider>
+        </>
     )
 }

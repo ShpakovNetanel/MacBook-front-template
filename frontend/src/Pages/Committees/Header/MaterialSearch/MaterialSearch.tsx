@@ -1,4 +1,5 @@
 import { Plus } from "lucide-react";
+import { useState } from "react";
 import { useFetchMaterials } from "../../../../api/materials";
 import { ZCombobox } from "../../../../components/ZCombobox/ZCombobox";
 import type { Material } from "../../../../types/types";
@@ -8,18 +9,27 @@ import { MaterialSearchLabel } from "./MaterialSearchLabel/MaterialSearchLabel";
 
 export const MaterialSearch = () => {
     const materials = useFetchMaterials();
+    const [selectedMaterials, setSelectedMaterials] = useState<Material[]>([]);
+
+    const addMaterials = () => {    
+        setSelectedMaterials([]);
+    }
 
     return (
         <>
-            <button className={styles.Plus}>
+            <button type='button' className={styles.Plus} onClick={addMaterials}>
                 <Plus />
             </button>
-            <ZCombobox items={materials}
+            <ZCombobox
+                value={selectedMaterials}
+                onValueChange={setSelectedMaterials}
+                isItemEqualToValue={(item, selectedItem) => item.id === selectedItem.id}
+                items={materials}
                 multiple
                 slotProps={{
                     classes: {
-                        Input: styles.Input,
-                        Container: styles.Container
+                        Container: styles.Container,
+                        ItemIndicatorIcon: styles.ItemIndicatorIcon
                     }
                 }}
                 placeholder='בחירת מק״ט'

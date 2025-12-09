@@ -13,7 +13,7 @@ type SlotProps = {
 type ZTooltipProps = {
     title: string;
     slotProps?: SlotProps
-} & PropsWithChildren;
+} & PropsWithChildren & Tooltip.Root.Props;
 
 function ArrowSvg(props: React.ComponentProps<'svg'>) {
     return (
@@ -34,11 +34,11 @@ function ArrowSvg(props: React.ComponentProps<'svg'>) {
     );
 }
 
-export const ZTooltip = ({ title, children, slotProps }: ZTooltipProps) => {
+export const ZTooltip = ({ title, children, slotProps, ...props }: ZTooltipProps) => {
     return (
         <Tooltip.Provider>
             <div className={clsx(styles.Panel, slotProps?.classes?.Panel)}>
-                <Tooltip.Root>
+                <Tooltip.Root {...props}>
                     <Tooltip.Trigger className={clsx(styles.Button, slotProps?.classes?.Trigger)}>
                         {children}
                     </Tooltip.Trigger>

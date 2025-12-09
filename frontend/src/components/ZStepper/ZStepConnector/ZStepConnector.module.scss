@@ -1,0 +1,11 @@
+@layer base {
+  .Connector {
+    width: 1rem;
+    height: 1px;
+    background: #ddd;
+
+    &[data-active] {
+      color: blue;
+    }
+  } 
+}

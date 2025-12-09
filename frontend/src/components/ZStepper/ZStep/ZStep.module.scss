@@ -1,0 +1,14 @@
+@layer base {
+    .Step {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        gap: 0.4rem;
+
+        &[data-disabled] {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    }
+}

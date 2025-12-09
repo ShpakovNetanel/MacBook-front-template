@@ -1,0 +1,27 @@
+@layer component {
+    .Label {
+        color: white;
+
+        &[data-active] {
+            color: #007bff;
+        }
+
+        &[data-completed] {
+            color: green;
+        }
+
+        &[data-inactive] {
+            color: white;
+        }
+    }
+
+    .Indicator {
+        font-size: 0.7rem;
+    }
+
+    .Connector {
+        &[data-active] {
+            color: blue;
+        }
+    }   
+}

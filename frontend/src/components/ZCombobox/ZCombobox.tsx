@@ -2,7 +2,7 @@ import { Combobox, Separator } from "@base-ui-components/react"
 import clsx from "clsx"
 import { isEmpty, isPlainObject } from 'lodash'
 import { Check, X } from "lucide-react"
-import { useId, type ReactNode } from "react"
+import { useId, useRef, type ReactNode } from "react"
 import type { ClassNames } from "../../types/baseui"
 import styles from './ZCombobox.module.scss'
 import { isValueLabelPair } from "../../utils/utilities"
@@ -18,7 +18,7 @@ type Disable = {
 }
 
 type SlotProps = {
-	classes?: ClassNames<typeof Combobox, | 'Container'>;
+	classes?: ClassNames<typeof Combobox, 'Container' | 'ItemIndicatorIcon'>;
 	disable?: Disable;
 }
 
@@ -40,6 +40,7 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 	valueNode,
 	...props
 }: ZComboboxProps<Value, Multiple>) => {
+	const containerRef = useRef<HTMLDivElement | null>(null);
 	const id = useId();
 
 	const getItemValue = (item: Value) => {
@@ -78,43 +79,44 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 		<Combobox.Root items={items} {...props}>
 			<div className={clsx(styles.Container, slotProps?.classes?.Container)}>
 				{props.multiple
-					? <Combobox.Chips className={styles.Chips}>
+					? <Combobox.Chips className={styles.Chips} ref={containerRef}>
 						<Combobox.Value>
 							{(values: Value[]) =>
-								valueNode
-									? <>
-										{valueNode(values)}
-										<Combobox.Input
-											placeholder={isEmpty(values) ? placeholder : ''}
-											id={id}
-											className={clsx(styles.Input, slotProps?.classes?.Input)} />
-									</>
-									: values.map((value) => (
-										<Combobox.Chip
-											key={getItemValue(value)}
-											className={styles.Chip}
-										>
-											{getItemValue(value)}
-											<Combobox.ChipRemove className={styles.ChipRemove} aria-label="Remove">
-												<X />
-											</Combobox.ChipRemove>
-										</Combobox.Chip>
-									))
+								<>
+									{valueNode
+										?
+										valueNode(values)
+										: values.map((value) => (
+											<Combobox.Chip
+												key={getItemValue(value)}
+												className={styles.Chip}
+											>
+												{getItemValue(value)}
+												<Combobox.ChipRemove className={styles.ChipRemove} aria-label="Remove">
+													<X />
+												</Combobox.ChipRemove>
+											</Combobox.Chip>
+										))}
+									<Combobox.Input
+										placeholder={isEmpty(values) ? placeholder : ''}
+										id={id}
+										className={clsx(styles.Input, slotProps?.classes?.Input)} />
+								</>
 							}
 						</Combobox.Value>
 					</Combobox.Chips>
 					: <Combobox.Input
 						placeholder={placeholder}
 						id={id}
-						className={clsx(styles.Input, slotProps?.classes?.Input)} />
-				}
+						className={clsx(styles.Input, slotProps?.classes?.Input)} />}
 			</div>
 
 			<Combobox.Portal>
 				<Combobox.Positioner
 					className={clsx(styles.Positioner, slotProps?.classes?.Positioner)}
-					sideOffset={4}>
-					<Combobox.Popup className={clsx(styles.Popup, slotProps?.classes?.Popup)}>
+					sideOffset={4}
+					anchor={containerRef}>
+					<Combobox.Popup  className={clsx(styles.Popup, slotProps?.classes?.Popup)}>
 						{!slotProps?.disable?.emptyLabel &&
 							<Combobox.Empty className={clsx(styles.Empty, slotProps?.classes?.Empty)}>
 								{emptyLabel}
@@ -126,8 +128,9 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 									value={item}
 									className={clsx(styles.Item, slotProps?.classes?.Item)}>
 									{!slotProps?.disable?.checkIndicator &&
-										<Combobox.ItemIndicator className={clsx(styles.ItemIndicator, slotProps?.classes?.ItemIndicator)}>
-											<Check className={styles.ItemIndicatorIcon} />
+										<Combobox.ItemIndicator
+											className={clsx(styles.ItemIndicator, slotProps?.classes?.ItemIndicator)}>
+											<Check className={clsx(styles.ItemIndicatorIcon, slotProps?.classes?.ItemIndicatorIcon)} />
 										</Combobox.ItemIndicator>}
 									{itemComponent
 										? itemComponent(item)

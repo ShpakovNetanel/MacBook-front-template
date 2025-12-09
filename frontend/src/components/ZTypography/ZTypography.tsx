@@ -4,8 +4,8 @@ import type { PropsWithChildren } from "react"
 import clsx from "clsx";
 
 type Classes = {
-    Field: keyof typeof styles;
-    Label: keyof typeof styles;
+    Field?: keyof typeof styles;
+    Label?: keyof typeof styles;
 }
 
 type SlotProps = {
@@ -14,12 +14,12 @@ type SlotProps = {
 
 type ZTypographyProps = PropsWithChildren & {
     slotProps?: SlotProps;
-}
+} & Field.Label.Props
 
-export const ZTyphography = ({ children, slotProps }: ZTypographyProps) => {
+export const ZTyphography = ({ children, slotProps, ...props }: ZTypographyProps) => {
     return (
         <Field.Root className={clsx(styles.Field, slotProps?.classes?.Field)}>
-            <Field.Label className={clsx(styles.Label, slotProps?.classes?.Label)}>{children}</Field.Label>
+            <Field.Label {...props} className={clsx(styles.Label, slotProps?.classes?.Label)}>{children}</Field.Label>
         </Field.Root>
     )
 }
