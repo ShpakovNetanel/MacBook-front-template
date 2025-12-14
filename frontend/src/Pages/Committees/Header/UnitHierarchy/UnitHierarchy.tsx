@@ -3,7 +3,10 @@ import styles from './UnitHierarchy.module.scss';
 
 export const UnitHierarchy = () => {
     return (
-        <ZDrawer slotProps={{
+        <ZDrawer 
+        slotProps={{
+            disableBackdrop: true,
+            direction: 'left',
             classes: {
                 Trigger: styles.Trigger
             }

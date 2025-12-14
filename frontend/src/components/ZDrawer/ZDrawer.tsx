@@ -16,7 +16,8 @@ type Classes = {
 type SlotProps = {
     height?: string;
     width?: string;
-    direction?: Direction
+    direction?: Direction;
+    disableBackdrop?: boolean;
     classes?: Classes;
 }
 
@@ -52,8 +53,8 @@ export const ZDrawer = ({
                 {triggerIcon ?? <Menu />}
             </Dialog.Trigger>
             <Dialog.Portal>
-                <Dialog.Backdrop
-                    className={styles.Backdrop} />
+                {!slotProps?.disableBackdrop && <Dialog.Backdrop
+                    className={styles.Backdrop} />}
                 <Dialog.Popup className={clsx(styles.Drawer, slotProps?.classes?.Drawer, styles[direction])}
                     style={{ width, height }}>
                     {children}

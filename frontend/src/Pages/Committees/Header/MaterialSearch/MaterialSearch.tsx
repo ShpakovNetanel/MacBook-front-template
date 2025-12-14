@@ -35,7 +35,7 @@ export const MaterialSearch = () => {
                 placeholder='בחירת מק״ט'
                 emptyLabel='אין מק״טים להצגה'
                 itemComponent={(item: Material) => <MaterialSearchItem item={item} />}
-                valueNode={(materials: Material[]) => <MaterialSearchLabel materials={materials} />}
+                valueNode={(materials: Material[] | Material) => <MaterialSearchLabel materials={materials} />}
             />
         </>
     )

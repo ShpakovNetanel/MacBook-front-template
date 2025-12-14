@@ -1,18 +1,23 @@
+import clsx from 'clsx';
 import styles from './ZChip.module.scss';
 
+type Classes = {
+    Label?: string | undefined;
+}
+
 type SlotProps = {
+    classes?: Classes;
     backgroundColor?: string;
 }
 
 type ZChipProps = {
     label: string;
-    labelClassName?: string | undefined;
     slotProps?: SlotProps;
 }
 
-export const ZChip = ({ label, labelClassName, slotProps }: ZChipProps) => {
+export const ZChip = ({ label, slotProps }: ZChipProps) => {
     return (
-        <div className={styles[labelClassName ?? "Label"]}
+        <div className={clsx(styles.Label, slotProps?.classes?.Label)}
             style={{ background: slotProps?.backgroundColor }}>
             {label}
         </div>

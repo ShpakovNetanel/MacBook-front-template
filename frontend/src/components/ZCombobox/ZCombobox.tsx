@@ -1,7 +1,7 @@
 import { Combobox, Separator } from "@base-ui-components/react"
 import clsx from "clsx"
 import { isEmpty, isPlainObject } from 'lodash'
-import { Check, X } from "lucide-react"
+import { Check, ChevronDown, X } from "lucide-react"
 import { useId, useRef, type ReactNode } from "react"
 import type { ClassNames } from "../../types/baseui"
 import styles from './ZCombobox.module.scss'
@@ -18,7 +18,8 @@ type Disable = {
 }
 
 type SlotProps = {
-	classes?: ClassNames<typeof Combobox, 'Container' | 'ItemIndicatorIcon'>;
+	classes?: ClassNames<typeof Combobox, 'Container' | 'ItemIndicatorIcon' | 'InputWrapper'
+		| 'ActionButtons'>;
 	disable?: Disable;
 }
 
@@ -28,12 +29,12 @@ type ZComboboxProps<Value, Multiple extends boolean | undefined = false> = {
 	emptyLabel: string;
 	slotProps?: SlotProps;
 	itemComponent?: (item: Value) => ReactNode;
-	valueNode?: (values: Value[]) => ReactNode;
+	valueNode?: (values: Value[] | Value) => ReactNode;
 } & Combobox.Root.Props<Value, Multiple>
 
 export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 	items,
-	placeholder,
+	placeholder = '',
 	emptyLabel,
 	itemComponent,
 	slotProps,
@@ -84,8 +85,7 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 							{(values: Value[]) =>
 								<>
 									{valueNode
-										?
-										valueNode(values)
+										? valueNode(values)
 										: values.map((value) => (
 											<Combobox.Chip
 												key={getItemValue(value)}
@@ -105,16 +105,15 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 							}
 						</Combobox.Value>
 					</Combobox.Chips>
-					: <Combobox.Input
-						placeholder={placeholder}
-						id={id}
-						className={clsx(styles.Input, slotProps?.classes?.Input)}>
-						<div className={styles.ActionButtons}>
-							<Combobox.Clear className={styles.Clear} aria-label="Clear selection">
+					: <div className={clsx(styles.InputWrapper, slotProps?.classes?.InputWrapper)}>
+						<Combobox.Input placeholder="e.g. Apple" id={id} className={clsx(styles.Input, slotProps?.classes?.Input)} />
+						<div className={clsx(styles.ActionButtons, slotProps?.classes?.ActionButtons)}>
+							<Combobox.Clear className={clsx(styles.Clear, slotProps?.classes?.Clear)} aria-label="Clear selection">
 								<X className={styles.ClearIcon} />
 							</Combobox.Clear>
 						</div>
-					</Combobox.Input>}
+					</div>
+				}
 			</div>
 
 			<Combobox.Portal>

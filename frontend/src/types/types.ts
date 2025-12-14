@@ -8,3 +8,10 @@ export type Material = {
     category: string;
     unitOfMeasure: string;
 }
+
+export type Unit = {
+    id: number;
+    description: string;
+    level: number;
+    simul: string;
+};

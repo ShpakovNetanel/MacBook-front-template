@@ -7,7 +7,7 @@
         }
 
         &[data-completed] {
-            color: green;
+            color: red;
         }
 
         &[data-inactive] {
@@ -17,5 +17,9 @@
 
     .Indicator {
         font-size: 0.7rem;
+
+        &[data-completed] {
+            background-color: red;
+        }
     }
 }

@@ -1,0 +1,9 @@
+@layer component {
+    .Item {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        grid-column-start: 2;
+    }
+}

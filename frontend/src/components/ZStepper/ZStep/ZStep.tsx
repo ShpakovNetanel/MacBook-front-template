@@ -17,17 +17,19 @@ type SlotProps = {
 export type ZStepProps = PropsWithChildren & {
     index: number;
     disabled?: boolean;
+    completed?: boolean;
     slotProps?: SlotProps;
 };
 
-export const ZStep = ({ index, disabled, children, slotProps }: ZStepProps) => {
+export const ZStep = ({ index, disabled, children,
+    completed, slotProps }: ZStepProps) => {
     const { active, setActive } = useStepper();
 
     const state: StepState = disabled
         ? "disabled"
         : index === active
             ? "active"
-            : index < active
+            : completed ?? index < active
                 ? "completed"
                 : "inactive";
 

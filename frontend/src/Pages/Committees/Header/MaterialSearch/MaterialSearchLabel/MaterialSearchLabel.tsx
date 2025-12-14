@@ -4,15 +4,17 @@ import styles from './MaterialSearchLabel.module.scss';
 import { isEmpty } from "lodash";
 
 type MaterialSearchLabelProps = {
-    materials: Material[];
+    materials: Material[] | Material;
 }
 
 export const MaterialSearchLabel = ({ materials }: MaterialSearchLabelProps) => {
-    return !isEmpty(materials)
+    const selectedMaterials = Array.isArray(materials) ? materials : [materials];
+
+    return !isEmpty(selectedMaterials)
         ? <Combobox.Chip className={styles.Chip}>
-            {materials.length > 1
-                ? `נבחרו ${materials.length} מק״טים`
-                : `${materials[0].id} - ${materials[0].description}`}
+            {selectedMaterials.length > 1
+                ? `נבחרו ${selectedMaterials.length} מק״טים`
+                : `${selectedMaterials[0].id} - ${selectedMaterials[0].description}`}
         </Combobox.Chip>
         : null
 }
