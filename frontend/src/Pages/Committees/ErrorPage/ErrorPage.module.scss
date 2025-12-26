@@ -1,0 +1,14 @@
+@layer custom {
+    .Page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f8f9fa;
+        height: 100%;
+
+        .Message {
+            font-size: 1.5rem;
+            color: red;
+        }
+    }
+}

@@ -13,13 +13,14 @@ type SlotProps = {
 
 export type ZStepperProps = PropsWithChildren & {
   active?: number;
+  setActiveStep?: (step: number) => void
   defaultActive?: number;
-  onChange?: (index: number) => void;
   orientation?: "horizontal" | "vertical";
   slotProps?: SlotProps;
+  
 };
 
-export const ZStepper = ({
+export const ZStepper= ({
   slotProps,
   children,
   ...providerProps

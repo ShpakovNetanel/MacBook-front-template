@@ -3,6 +3,8 @@
     background-color: transparent;
     border: none;
     color: white;
+    padding: 0;
+    cursor: pointer;
   }
 
   .Backdrop {
@@ -25,12 +27,11 @@
     z-index: 100;
     display: flex;
     flex-direction: column;
-    transition: transform 0.25s ease;
-    pointer-events: auto;
+    transition: transform 0.25s ease-in-out;
+  }
 
-    &[data-open] {
-      transform: translate(0, 0);
-    }
+  .Drawer[data-open] {
+    transform: translate(0, 0);
   }
 
   .right {
@@ -63,5 +64,25 @@
     transform: translateY(100%);
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+  }
+
+  .right[data-starting-style],
+  .right:not([data-open]) {
+    transform: translateX(100%);
+  }
+
+  .left[data-starting-style],
+  .left:not([data-open]) {
+    transform: translateX(-100%);
+  }
+
+  .top[data-starting-style],
+  .top:not([data-open]) {
+    transform: translateY(-100%);
+  }
+
+  .bottom[data-starting-style],
+  .bottom:not([data-open]) {
+    transform: translateY(100%);
   }
 }

@@ -1,12 +1,15 @@
-.Page {
-    width: 100vw;
-    height: 100vh;
-}
+@layer custom {
+    .DabaPage {
+        width: 100vw;
+        height: 100vh;
+        background-color: #F6F8FB;
+    }
 
-.Header {
-    height: 3.75rem;
-}
+    .Header {
+        height: 3.75rem;
+    }
 
-.Content {
-    height: calc(100% - 3.75rem);
+    .Content {
+        height: calc(100% - 3.75rem);
+    }
 }

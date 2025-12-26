@@ -1,11 +1,11 @@
 import { Combobox, Separator } from "@base-ui-components/react"
 import clsx from "clsx"
 import { isEmpty, isPlainObject } from 'lodash'
-import { Check, ChevronDown, X } from "lucide-react"
+import { Check, X } from "lucide-react"
 import { useId, useRef, type ReactNode } from "react"
 import type { ClassNames } from "../../types/baseui"
-import styles from './ZCombobox.module.scss'
 import { isValueLabelPair } from "../../utils/utilities"
+import styles from './ZCombobox.module.scss'
 
 export type Primitive = string | number;
 export type ValueLabelPair = { value: any; label: string };
@@ -14,12 +14,12 @@ type Disable = {
 	emptyLabel?: boolean;
 	checkIndicator?: boolean;
 	clearable?: boolean;
-	separator: boolean;
+	separator?: boolean;
 }
 
 type SlotProps = {
 	classes?: ClassNames<typeof Combobox, 'Container' | 'ItemIndicatorIcon' | 'InputWrapper'
-		| 'ActionButtons'>;
+		| 'ActionButtons' | 'ClearIcon'>;
 	disable?: Disable;
 }
 
@@ -30,6 +30,7 @@ type ZComboboxProps<Value, Multiple extends boolean | undefined = false> = {
 	slotProps?: SlotProps;
 	itemComponent?: (item: Value) => ReactNode;
 	valueNode?: (values: Value[] | Value) => ReactNode;
+	onClear?: () => void
 } & Combobox.Root.Props<Value, Multiple>
 
 export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
@@ -39,6 +40,7 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 	itemComponent,
 	slotProps,
 	valueNode,
+	onClear,
 	...props
 }: ZComboboxProps<Value, Multiple>) => {
 	const containerRef = useRef<HTMLDivElement | null>(null);
@@ -106,10 +108,10 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 						</Combobox.Value>
 					</Combobox.Chips>
 					: <div className={clsx(styles.InputWrapper, slotProps?.classes?.InputWrapper)}>
-						<Combobox.Input placeholder="e.g. Apple" id={id} className={clsx(styles.Input, slotProps?.classes?.Input)} />
+						<Combobox.Input placeholder={placeholder} id={id} className={clsx(styles.Input, slotProps?.classes?.Input)} />
 						<div className={clsx(styles.ActionButtons, slotProps?.classes?.ActionButtons)}>
-							<Combobox.Clear className={clsx(styles.Clear, slotProps?.classes?.Clear)} aria-label="Clear selection">
-								<X className={styles.ClearIcon} />
+							<Combobox.Clear className={clsx(styles.Clear, slotProps?.classes?.Clear)} onClick={onClear}>
+								<X className={clsx(styles.ClearIcon, slotProps?.classes?.ClearIcon)} />
 							</Combobox.Clear>
 						</div>
 					</div>
@@ -140,7 +142,7 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 									{itemComponent
 										? itemComponent(item)
 										: <div className={styles.ItemText}>{getItemLabel(item)}</div>}
-									{index < items.length - 1 && <Separator className={styles.Separator} />}
+									{index < items.length - 1 && <Separator orientation="horizontal" className={styles.Separator} />}
 								</Combobox.Item>
 							)}
 						</Combobox.List>

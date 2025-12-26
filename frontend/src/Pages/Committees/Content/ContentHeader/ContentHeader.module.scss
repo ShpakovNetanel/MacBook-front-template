@@ -1,0 +1,13 @@
+@layer custom {
+    .Units {
+        display: flex;
+        width: 65vw;
+        justify-content: space-around;
+        min-height: 8%;
+        align-items: center;
+
+        .UnitDescription {
+            font-weight: 600;
+        }
+    }
+}

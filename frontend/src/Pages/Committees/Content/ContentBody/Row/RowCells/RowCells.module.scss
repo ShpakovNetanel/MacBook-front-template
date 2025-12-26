@@ -1,0 +1,8 @@
+@layer custom {
+    .Cells {
+        width: var(--cells-width);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+}

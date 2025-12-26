@@ -1,0 +1,12 @@
+@layer custom {
+    .Row {
+        display: flex;
+        flex-direction: row;
+        background-color: var(--row-color);
+        height: var(--row-height);
+        border-radius: 3rem;
+        margin: 0 0.5rem;
+        padding: 0 1rem;
+        align-items: center;
+    }
+}

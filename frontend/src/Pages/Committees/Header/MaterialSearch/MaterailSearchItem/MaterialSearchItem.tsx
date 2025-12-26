@@ -1,10 +1,10 @@
-import { Heart } from "lucide-react";
+import { Toggle } from "@base-ui-components/react";
+import { Star } from "lucide-react";
 import { ZChip } from "../../../../../components/ZChip/ZChip";
 import { ZTyphography } from "../../../../../components/ZTypography/ZTypography";
 import type { Material } from "../../../../../types/types";
 import { stringToHslColor } from "../../../../../utils/stringToColor";
 import styles from './MaterialSearchItem.module.scss';
-import { Toggle } from "@base-ui-components/react";
 
 type MaterialSearchItemProps = {
     item: Material;
@@ -42,14 +42,14 @@ export const MaterialSearchItem = ({ item }: MaterialSearchItemProps) => {
                     if (state.pressed) {
                         return (
                             <button type="button" {...props} className={styles.Button}>
-                                <Heart className={styles.Icon} fill="rgba(255, 105, 180, 0.8)" />
+                                <Star className={styles.Icon} fill="yellow" />
                             </button>
                         );
                     }
 
                     return (
                         <button type="button" {...props} className={styles.Button}>
-                            <Heart className={styles.Icon} />
+                            <Star className={styles.Icon} />
                         </button>
                     );
                 }} />

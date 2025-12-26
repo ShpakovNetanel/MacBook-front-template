@@ -1,7 +1,7 @@
 import { MonitorUp } from "lucide-react"
-import { ZSpeedDialMenu } from "../../../../components/ZSpeedDial/ZSpeedDialMenu/ZSpeedDialMenu"
-import styles from "./MaterialPresets.module.scss"
-import { ZTooltip } from "../../../../components/ZTooltip/ZTooltip"
+import { ZSpeedDialMenu } from "../../../../../components/ZSpeedDial/ZSpeedDialMenu/ZSpeedDialMenu"
+import { ZTooltip } from "../../../../../components/ZTooltip/ZTooltip"
+import styles from './MaterialPresets.module.scss';
 
 export const MaterialPresets = () => {
     return (

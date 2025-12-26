@@ -6,6 +6,7 @@ import styles from "./ZStepIndicator.module.scss";
 
 type Classes = {
     Indicator?: keyof typeof styles;
+    Icon?: keyof typeof styles;
 }
 
 type SlotProps = {
@@ -27,7 +28,7 @@ export const ZStepIndicator = ({ slotProps }: ZStepIndicatorProps) => {
             data-completed={state === 'completed' || undefined}
             data-disabled={state === 'disabled' || undefined}>
             {state === 'completed'
-                ? slotProps?.completedIcon ?? <Check size={2} />
+                ? slotProps?.completedIcon ?? <Check className={clsx(styles.Icon, slotProps?.classes?.Icon)} size={12} />
                 : stepIndex}
         </div>
     );

@@ -1,0 +1,18 @@
+@layer custom {
+    .Prefix {
+        display: flex;
+        flex-direction: column;
+        width: 15vw;
+        margin-right: 1rem;
+        
+        .MaterialId {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .Nickname {
+            font-weight: 600;
+        }
+    }
+
+}

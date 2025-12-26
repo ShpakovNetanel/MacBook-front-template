@@ -11,15 +11,21 @@
         transition: all 0.2s;
 
         &[data-active] {
-            border-color: #007bff;
-            background: #007bff;
+            background-color: blue;
             color: white;
         }
 
         &[data-completed] {
-            border-color: #2ecc71;
             background: #2ecc71;
             color: white;
         }
+    }
+
+    .Icon {
+        width: inherit;
+        height: inherit;
+        border-radius: inherit;
+        border: none;
+        transition: inherit;
     }
 }

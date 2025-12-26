@@ -1,0 +1,12 @@
+@layer custom {
+    .Suffix {
+        width: 18vw;
+        display: flex;
+        gap: 0.5rem;
+        justify-content: end;
+
+        .Inventory {
+            color: black;
+        }
+    }
+}

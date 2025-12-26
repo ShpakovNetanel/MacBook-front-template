@@ -21,15 +21,15 @@ export const useStepper = () => {
 
 export type ZStepperProviderProps = PropsWithChildren & {
   active?: number;
+  setActiveStep?: (step: number) => void
   defaultActive?: number;
-  onChange?: (n: number) => void;
   orientation?: "horizontal" | "vertical";
 }
 
 export const ZStepperProvider = ({
   active,
+  setActiveStep,
   defaultActive = 0,
-  onChange,
   orientation = "horizontal",
   children,
 }: ZStepperProviderProps) => {
@@ -40,7 +40,8 @@ export const ZStepperProvider = ({
 
   const setActive = (n: number) => {
     if (!isControlled) setInternalActive(n);
-    onChange?.(n);
+
+    setActiveStep?.(n);
   };
 
   return (

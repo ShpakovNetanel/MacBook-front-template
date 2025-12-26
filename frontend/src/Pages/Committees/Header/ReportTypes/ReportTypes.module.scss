@@ -1,25 +1,46 @@
-@layer component {
-    .Label {
-        color: white;
+@layer custom {
+    @layer custom {
+        .Step {
+            cursor: pointer;
 
-        &[data-active] {
-            color: #007bff;
+            .Indicator {
+                font-size: 0.7rem;
+            }
+
+            &[data-state='active'] {
+                .Label {
+                    color: var(--step-color);
+                }
+
+                .Indicator {
+                    background-color: var(--step-color);
+                }
+            }
+
+            &[data-state='completed'] {
+                .Label {
+                    color: color-mix(in srgb, var(--step-color), white 40%);
+                }
+
+                .Indicator {
+                    background-color: var(--step-color);
+                }
+            }
+
+            &[data-state='inactive'] {
+                .Label {
+                    color: white;
+                }
+
+                .Indicator {
+                    background-color: white;
+                }
+            }
         }
 
-        &[data-completed] {
-            color: red;
-        }
-
-        &[data-inactive] {
-            color: white;
+        .Icon {
+            height: 0.9rem;
         }
     }
 
-    .Indicator {
-        font-size: 0.7rem;
-
-        &[data-completed] {
-            background-color: red;
-        }
-    }
 }

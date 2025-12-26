@@ -17,6 +17,7 @@ type Disable = {
 type SlotProps = {
     classes?: Classes;
     disable?: Disable;
+    openOnHover?: boolean
 }
 
 type ZSpeedDialMenuProps = {
@@ -27,8 +28,8 @@ type ZSpeedDialMenuProps = {
 
 export const ZSpeedDialMenu = ({ items, trigger, slotProps }: ZSpeedDialMenuProps) => {
     return (
-        <Menu.SubmenuRoot openOnHover={false}>
-            <Menu.SubmenuTrigger className={clsx(styles.Button, slotProps?.classes?.Button)}>
+        <Menu.SubmenuRoot>
+            <Menu.SubmenuTrigger openOnHover={slotProps?.openOnHover ?? false} className={clsx(styles.Button, slotProps?.classes?.Button)}>
                 {trigger}
             </Menu.SubmenuTrigger>
             <Menu.Portal>

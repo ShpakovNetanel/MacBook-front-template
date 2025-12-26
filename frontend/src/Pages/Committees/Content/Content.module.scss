@@ -1,6 +1,15 @@
-.ContentPage {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@layer custom {
+    :root { 
+        --cells-width: 65vw;
+    }
+
+    .Content {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: rgba(244, 244, 246, 0.7);
+        position: relative;
+    }
 }

@@ -5,8 +5,7 @@ export const UnitHierarchy = () => {
     return (
         <ZDrawer 
         slotProps={{
-            disableBackdrop: true,
-            direction: 'left',
+            direction: 'right',
             classes: {
                 Trigger: styles.Trigger
             }
