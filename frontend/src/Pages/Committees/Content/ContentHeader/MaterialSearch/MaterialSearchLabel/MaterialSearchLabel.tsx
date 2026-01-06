@@ -1,5 +1,5 @@
 import { Combobox } from "@base-ui-components/react";
-import type { Material } from "../../../../../types/types";
+import type { Material } from "../../../../../../types/types";
 import styles from './MaterialSearchLabel.module.scss';
 import { isEmpty } from "lodash";
 

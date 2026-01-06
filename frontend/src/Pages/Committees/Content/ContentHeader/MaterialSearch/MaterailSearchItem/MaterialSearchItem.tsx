@@ -1,9 +1,9 @@
 import { Toggle } from "@base-ui-components/react";
 import { Star } from "lucide-react";
-import { ZChip } from "../../../../../components/ZChip/ZChip";
-import { ZTyphography } from "../../../../../components/ZTypography/ZTypography";
-import type { Material } from "../../../../../types/types";
-import { stringToHslColor } from "../../../../../utils/stringToColor";
+import { ZChip } from "../../../../../../components/ZChip/ZChip";
+import { ZTyphography } from "../../../../../../components/ZTypography/ZTypography";
+import type { Material } from "../../../../../../types/types";
+import { stringToHslColor } from "../../../../../../utils/stringToColor";
 import styles from './MaterialSearchItem.module.scss';
 
 type MaterialSearchItemProps = {

@@ -11,6 +11,7 @@ const YAxios = ['top', 'bottom'];
 type Classes = {
     Trigger?: keyof typeof styles;
     Drawer?: keyof typeof styles;
+    Icon?: keyof typeof styles;
 }
 
 type SlotProps = {
@@ -50,7 +51,7 @@ export const ZDrawer = ({
     return (
         <Dialog.Root {...props}>
             <Dialog.Trigger className={clsx(styles.Trigger, slotProps?.classes?.Trigger)}>
-                {triggerIcon ?? <Menu />}
+                {triggerIcon ?? <Menu className={clsx(slotProps?.classes?.Icon)}/>}
             </Dialog.Trigger>
             <Dialog.Portal>
                 {!slotProps?.disableBackdrop && <Dialog.Backdrop

@@ -7,7 +7,8 @@ export const UnitHierarchy = () => {
         slotProps={{
             direction: 'right',
             classes: {
-                Trigger: styles.Trigger
+                Trigger: styles.Trigger,
+                Icon: styles.Icon
             }
         }}/>
     )

@@ -1,7 +1,7 @@
 import { Combobox, Separator } from "@base-ui-components/react"
 import clsx from "clsx"
 import { isEmpty, isPlainObject } from 'lodash'
-import { Check, X } from "lucide-react"
+import { Check, ChevronDown, X } from "lucide-react"
 import { useId, useRef, type ReactNode } from "react"
 import type { ClassNames } from "../../types/baseui"
 import { isValueLabelPair } from "../../utils/utilities"
@@ -19,7 +19,7 @@ type Disable = {
 
 type SlotProps = {
 	classes?: ClassNames<typeof Combobox, 'Container' | 'ItemIndicatorIcon' | 'InputWrapper'
-		| 'ActionButtons' | 'ClearIcon'>;
+		| 'ActionButtons' | 'StartAdornment' | 'TriggerIcon'>;
 	disable?: Disable;
 }
 
@@ -28,9 +28,13 @@ type ZComboboxProps<Value, Multiple extends boolean | undefined = false> = {
 	placeholder: string;
 	emptyLabel: string;
 	slotProps?: SlotProps;
+	startAdornment?: ReactNode;
 	itemComponent?: (item: Value) => ReactNode;
 	valueNode?: (values: Value[] | Value) => ReactNode;
-	onClear?: () => void
+	onAdormentClick?: () => void
+	// onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void
+	onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void
+
 } & Combobox.Root.Props<Value, Multiple>
 
 export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
@@ -38,9 +42,11 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 	placeholder = '',
 	emptyLabel,
 	itemComponent,
+	startAdornment,
 	slotProps,
 	valueNode,
-	onClear,
+	onAdormentClick,
+	onPaste,
 	...props
 }: ZComboboxProps<Value, Multiple>) => {
 	const containerRef = useRef<HTMLDivElement | null>(null);
@@ -82,7 +88,11 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 		<Combobox.Root items={items} {...props}>
 			<div className={clsx(styles.Container, slotProps?.classes?.Container)}>
 				{props.multiple
-					? <Combobox.Chips className={styles.Chips} ref={containerRef}>
+					?
+					<Combobox.Chips className={clsx(styles.Chips, slotProps?.classes?.Chips)} ref={containerRef}>
+						{startAdornment && <button className={clsx(styles.StartAdornment, slotProps?.classes?.StartAdornment)} onClick={onAdormentClick}>
+							{startAdornment}
+						</button>}
 						<Combobox.Value>
 							{(values: Value[]) =>
 								<>
@@ -99,20 +109,29 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 												</Combobox.ChipRemove>
 											</Combobox.Chip>
 										))}
+
 									<Combobox.Input
+										onPaste={onPaste}
 										placeholder={isEmpty(values) ? placeholder : ''}
 										id={id}
 										className={clsx(styles.Input, slotProps?.classes?.Input)} />
 								</>
 							}
 						</Combobox.Value>
+						<Combobox.Trigger className={clsx(styles.Trigger, slotProps?.classes?.Trigger)}>
+							<ChevronDown className={clsx(styles.TriggerIcon, slotProps?.classes?.TriggerIcon)} />
+						</Combobox.Trigger>
 					</Combobox.Chips>
-					: <div className={clsx(styles.InputWrapper, slotProps?.classes?.InputWrapper)}>
+					:
+					<div className={clsx(styles.InputWrapper, slotProps?.classes?.InputWrapper)}>
 						<Combobox.Input placeholder={placeholder} id={id} className={clsx(styles.Input, slotProps?.classes?.Input)} />
 						<div className={clsx(styles.ActionButtons, slotProps?.classes?.ActionButtons)}>
-							<Combobox.Clear className={clsx(styles.Clear, slotProps?.classes?.Clear)} onClick={onClear}>
-								<X className={clsx(styles.ClearIcon, slotProps?.classes?.ClearIcon)} />
-							</Combobox.Clear>
+							{startAdornment && <button className={clsx(styles.StartAdornment, slotProps?.classes?.StartAdornment)} onClick={onAdormentClick}>
+								{startAdornment}
+							</button>}
+							<Combobox.Trigger className={clsx(styles.Trigger, slotProps?.classes?.Trigger)} aria-label="Open popup">
+								<ChevronDown className={clsx(styles.TriggerIcon, slotProps?.classes?.TriggerIcon)} />
+							</Combobox.Trigger>
 						</div>
 					</div>
 				}
@@ -149,6 +168,6 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 					</Combobox.Popup>
 				</Combobox.Positioner>
 			</Combobox.Portal>
-		</Combobox.Root>
+		</Combobox.Root >
 	)
 }

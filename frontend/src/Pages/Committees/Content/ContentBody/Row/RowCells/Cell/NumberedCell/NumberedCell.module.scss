@@ -1,0 +1,44 @@
+@layer custom {
+    :root {
+        --icon-width: 0.8rem;
+    }
+
+    .Field {
+        gap: 0;
+    }
+
+    .Input {
+        width: calc(var(--cell-width) / 2);
+        height: var(--cell-height);
+        border: none;
+        font-size: 0.8rem;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .Group {
+        border-radius: 1rem;
+        background-color: #fdfdff;
+        border: 1px solid var(--color-border);
+        padding: 0.25rem 0.25rem;
+        justify-content: center;
+        align-items: center;
+        width: var(--cell-width);
+        height: var(--cell-height);
+    }
+
+    .Decrement,
+    .Increment {
+        position: relative;
+        border: none;
+        background: transparent;
+        width: var(--icon-width);
+        cursor: pointer;
+    }
+
+    .Icon {
+        background-color: black;
+    }
+}

@@ -11,6 +11,17 @@ export type Material = {
     unitOfMeasure: string;
 }
 
+export type ReportChangeKey = {
+    unitId: Unit["id"];
+    materialId: Material["id"];
+    type: ReportType;
+}
+
+export type ReportChange = ReportChangeKey & ({
+    quantity?: number;
+    comment?: string;
+});
+
 export type UnitStatus = {
     id: number;
     description: string;

@@ -22,7 +22,7 @@ export const Comment = ({ report }: CommentProps) => {
     return (
         <Dialog.Root>
             <Dialog.Trigger className={styles.Button}>
-                <MessageCircleMore />
+                <MessageCircleMore className={styles.Icon}/>
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Backdrop className={styles.Backdrop} />

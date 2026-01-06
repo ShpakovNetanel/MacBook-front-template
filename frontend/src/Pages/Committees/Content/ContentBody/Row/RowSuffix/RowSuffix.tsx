@@ -11,7 +11,7 @@ type RowSuffixProps = {
 export const RowSuffix = ({ report }: RowSuffixProps) => {
     return (
         <div className={styles.Suffix}>
-            <ZDrawer triggerIcon={<Warehouse />}
+            <ZDrawer triggerIcon={<Warehouse className={styles.Icon}/>}
                 slotProps={{
                     direction: 'bottom',
                     classes: {
@@ -19,7 +19,7 @@ export const RowSuffix = ({ report }: RowSuffixProps) => {
                     }
                 }} />
             <Comment report={report}/>
-            <Trash />
+            <Trash className={styles.Icon}/>
         </div>
     )
 }

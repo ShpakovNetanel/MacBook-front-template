@@ -2,7 +2,7 @@
     .Prefix {
         display: flex;
         flex-direction: column;
-        width: 15vw;
+        width: var(--prefix-width);
         margin-right: 1rem;
         
         .MaterialId {

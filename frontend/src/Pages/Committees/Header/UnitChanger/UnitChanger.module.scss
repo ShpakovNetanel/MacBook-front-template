@@ -1,13 +1,29 @@
 @layer custom {
     .Container {
-        background: rgb(216, 216, 216, 0.3);
+        background: transparent;
+        border: 1px solid var(--color-navbar-border);
         border-radius: var(--navbar-radius);
-    }
-
-    .Input {
         width: 15vw;
+    }
+    
+    .Input {
         height: 2.5rem;
         padding-right: 2rem;
+        color: white;
+    }   
+
+    .Trigger {
+        right: 12vw;
+        width: 2rem;
+        background-color: transparent;
+
+        .TriggerIcon {
+            color: white;
+        }
+    }
+
+    .ClearIcon {
+        width: 1rem;
         color: white;
     }
 
@@ -15,11 +31,7 @@
         margin-right: 0.5rem;
     }
 
-    .InputWrapper {
-        position: relative;
-    }
-
-    .Clear {
-        color: white;
+    .Label {
+        border-radius: 0.5rem;
     }
 }

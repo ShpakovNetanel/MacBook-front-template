@@ -1,0 +1,10 @@
+@layer custom {
+    .Icon {
+        width: 1rem;
+        transition: transform 150ms ease-out;
+
+        button[data-panel-open] > & {
+            transform: rotate(-90deg) scale(1.1);
+        }
+    }
+}

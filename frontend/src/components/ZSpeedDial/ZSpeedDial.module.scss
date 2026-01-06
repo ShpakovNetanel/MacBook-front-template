@@ -6,20 +6,7 @@
         background-color: transparent;
         border: none;
         color: white;
-
-        @media (hover: hover) {
-            &:hover {
-                background-color: var(--color-gray-100);
-            }
-        }
-
-        &:active {
-            background-color: var(--color-gray-100);
-        }
-
-        &[data-popup-open] {
-            background-color: var(--color-gray-100);
-        }
+        cursor: pointer;
     }
 
     .Positioner {

@@ -9,7 +9,6 @@ type Action = {
     updateReportType: (reportType: ReportType) => void;
 }
 
-
 export const useReportTypeStore = create<State & Action>((set) => ({
     reportType: ReportType.USAGE,
     updateReportType: (reportType: ReportType) => set({ reportType })

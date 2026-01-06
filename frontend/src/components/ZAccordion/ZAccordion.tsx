@@ -10,19 +10,19 @@ type SlotProps = {
 
 type ZAccordionProps = {
     slotProps?: SlotProps;
-    trigger?: ReactNode;
-    headerNode?: ReactNode;
+    title?: ReactNode;
+    actions?: ReactNode;
 } & PropsWithChildren;
 
-export const ZAccordion = ({ trigger, headerNode, children, slotProps, ...props }: ZAccordionProps) => {
+export const ZAccordion = ({ title, actions, children, slotProps, ...props }: ZAccordionProps) => {
     return (
         <Accordion.Root className={clsx(styles.Accordion, slotProps?.classes?.Root)} {...props}>
             <Accordion.Item className={clsx(styles.Item, slotProps?.classes?.Item)}>
                 <div className={clsx(styles.Header, slotProps?.classes?.Header)}>
                     <Accordion.Trigger className={clsx(styles.Trigger, slotProps?.classes?.Trigger)}>
-                        {trigger ?? 'פתח'}
+                        {title}
                     </Accordion.Trigger>
-                    {headerNode}
+                    {actions}
                 </div>
                 <Accordion.Panel className={clsx(styles.Panel, slotProps?.classes?.Panel)}>
                     {children}

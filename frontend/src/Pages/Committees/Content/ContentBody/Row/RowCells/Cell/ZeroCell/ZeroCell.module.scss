@@ -1,0 +1,7 @@
+@layer custom {
+    .Label {
+        width: calc(var(--cell-width) - 0.5rem);
+        height: var(--cell-height);
+        border-radius: 1rem;
+    }
+}

@@ -1,12 +1,16 @@
 @layer custom {
+    :root {
+        --icon-stroke-width: 1.5px;
+    }
+
     .Suffix {
-        width: 18vw;
+        width: 10vw;
         display: flex;
-        gap: 0.5rem;
         justify-content: end;
 
-        .Inventory {
+        .Icon {
             color: black;
+            stroke-width: var(--icon-stroke-width);
         }
     }
 }

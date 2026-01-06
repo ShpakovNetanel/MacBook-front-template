@@ -2,10 +2,15 @@
     .Chip {
         display: flex;
         align-items: center;
-        background-color: lightblue;
+        background-color: rgba(87, 74, 137, 0.3);
+        color: white;
         border-radius: 0.5rem;
         font-size: 0.875rem;
         padding: 0.1rem 0.5rem;
+        max-width: 50%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
 
         @media (hover: hover) {
             &[data-highlighted] {

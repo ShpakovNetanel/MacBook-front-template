@@ -1,7 +1,22 @@
 @layer custom {
+    :root {
+        --cell-width: 3.5rem;
+        --cell-height: 2rem;
+    }
+
     .Cell {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding: 0;
+
+        &[data-subrow=false] {
+            margin-top: 1rem;
+        }
     }   
+
+    .Label{ 
+        font-size: 0.8rem;
+    }
 }

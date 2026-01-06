@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { type CSSProperties, type PropsWithChildren } from "react";
+import { type CSSProperties, type MouseEventHandler, type PropsWithChildren } from "react";
 import { useStepper } from "../ZStepperProvider/ZStepperProvider";
 import { ZStepProvider } from "../ZStepProvider/ZStepProvider";
 import styles from "./ZStep.module.scss";
@@ -19,11 +19,12 @@ export type ZStepProps = PropsWithChildren & {
     index: number;
     disabled?: boolean;
     completed?: boolean;
+    onStepClick?: MouseEventHandler<HTMLElement>;
     slotProps?: SlotProps;
 };
 
 export const ZStep = ({ index, disabled, children,
-    completed, slotProps }: ZStepProps) => {
+    completed, onStepClick, slotProps }: ZStepProps) => {
     const { active, setActive } = useStepper();
 
     const state: StepState = disabled
@@ -40,11 +41,15 @@ export const ZStep = ({ index, disabled, children,
                 className={clsx(styles.Step, slotProps?.classes?.Step)}
                 data-state={state}
                 data-disabled={disabled || undefined}
-                onClick={() => !disabled && setActive(index)}
+                onClick={onStepClick
+                    ? onStepClick
+                    : () => {
+                        !disabled && setActive(index)
+                    }}
                 style={slotProps?.style}
             >
                 {children}
             </div>
-        </ZStepProvider>
+        </ZStepProvider >
     );
 };

@@ -110,7 +110,7 @@ export const useFetchMaterials = (): Material[] => {
             category: 'תחמושת כבדה'
         })),
 
-        ...Array.from({ length: 920 }, (_, i) => ({
+        ...Array.from({ length: 20 }, (_, i) => ({
             description: `אביזר נשק ${i + 1}`,
             id: `500000${i + 1}`,
             multiply: 1,
