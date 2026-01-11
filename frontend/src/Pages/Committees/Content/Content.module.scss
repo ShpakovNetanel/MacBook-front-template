@@ -3,6 +3,11 @@
         --cells-width: 65vw;
         --row-margin: 1.5rem;
         --prefix-width: 17vw;
+        --suffix-width: 10vw;
+        --row-padding: 1rem;
+        --prefix-gap: 1rem;
+        --carousel-arrow-offset: 1.5rem;
+        --carousel-count: 7;
     }
 
     .Content {
@@ -13,5 +18,14 @@
         flex-direction: column;
         background-color: var(--color-background);
         position: relative;
+        user-select: none;
+    }
+
+    .NoUnits {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

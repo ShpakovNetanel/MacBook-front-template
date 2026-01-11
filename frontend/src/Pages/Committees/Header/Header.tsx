@@ -16,8 +16,8 @@ export const Header = () => {
         <div className={styles.Header}>
             <div className={styles.Right}>
                 <UnitHierarchy />
-                <Separator orientation='vertical' className={styles.Separator}/>
-            <ReportTypes />
+                <Separator orientation='vertical' className={styles.Separator} />
+                <ReportTypes />
             </div>
             <div className={styles.Left}>
                 <SaveButton />
@@ -26,7 +26,7 @@ export const Header = () => {
                 <UnitChanger />
                 <Separator orientation='vertical' className={styles.Separator} />
                 <ZDatePicker value={screenDate}
-                    setValue={setScreenDate} /> 
+                    setValue={setScreenDate} />
                 <QuickActions />
             </div>
         </div>

@@ -12,7 +12,7 @@ type ZeroCellProps = {
 export const ZeroCell = ({ onChipClick }: ZeroCellProps) => {
     const reportType = useReportTypeStore(s => s.reportType);
 
-    return <ZChip label={<Plus />}
+    return <ZChip label={<Plus className={styles.Icon}/>}
         slotProps={{
             backgroundColor: REPORT_TYPES.colorsFunctions.getSecondary(reportType),
             classes: {

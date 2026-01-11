@@ -1,27 +1,22 @@
 @layer custom {
     .SubRow {
-        flex-direction: row;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        display: flex;
+        padding: 0 var(--row-padding);
         height: var(--row-height);
         border-radius: 0 0 3rem 3rem;
         background-color: var(--row-color);
+
         &[data-subrow-open="true"] {
             border-radius: 0;
         }
     }
 
+    .Label {
+        font-size: 0.2rem;
+    }
+
     .Separator {
         background-color: #E9EDFE;
         height: 0.5px;
-        margin: 0 var(--row-margin);
-        flex-shrink: 0;
-        align-self: stretch;
-    }
-
-    .Label {
-        font-size: 0.2rem;
+        width: 95%;
     }
 }

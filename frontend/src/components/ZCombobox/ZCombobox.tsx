@@ -2,7 +2,7 @@ import { Combobox, Separator } from "@base-ui-components/react"
 import clsx from "clsx"
 import { isEmpty, isPlainObject } from 'lodash'
 import { Check, ChevronDown, X } from "lucide-react"
-import { useId, useRef, type ReactNode } from "react"
+import { useEffect, useId, useRef, useState, type ReactNode } from "react"
 import type { ClassNames } from "../../types/baseui"
 import { isValueLabelPair } from "../../utils/utilities"
 import styles from './ZCombobox.module.scss'
@@ -18,7 +18,7 @@ type Disable = {
 }
 
 type SlotProps = {
-	classes?: ClassNames<typeof Combobox, 'Container' | 'ItemIndicatorIcon' | 'InputWrapper'
+	classes?: ClassNames<typeof Combobox, 'Checkbox' | 'Container' | 'ItemIndicatorIcon' | 'InputWrapper'
 		| 'ActionButtons' | 'StartAdornment' | 'TriggerIcon'>;
 	disable?: Disable;
 }
@@ -32,8 +32,9 @@ type ZComboboxProps<Value, Multiple extends boolean | undefined = false> = {
 	itemComponent?: (item: Value) => ReactNode;
 	valueNode?: (values: Value[] | Value) => ReactNode;
 	onAdormentClick?: () => void
-	// onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void
 	onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void
+	showItemIndicator?: boolean;
+	itemSelectedNoIndicatorClassName?: string;
 
 } & Combobox.Root.Props<Value, Multiple>
 
@@ -47,10 +48,21 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 	valueNode,
 	onAdormentClick,
 	onPaste,
+	showItemIndicator,
+	itemSelectedNoIndicatorClassName,
 	...props
 }: ZComboboxProps<Value, Multiple>) => {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const id = useId();
+	const isIndicatorEnabled = showItemIndicator ?? !slotProps?.disable?.checkIndicator;
+	const hasSingleValue = !props.multiple && props.value != null;
+	const [triggerAnimationKey, setTriggerAnimationKey] = useState(0);
+
+	useEffect(() => {
+		if (!props.multiple && props.value != null) {
+			setTriggerAnimationKey((prev) => prev + 1);
+		}
+	}, [props.multiple, props.value]);
 
 	const getItemValue = (item: Value) => {
 		if (isPlainObject(item)) {
@@ -129,7 +141,11 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 							{startAdornment && <button className={clsx(styles.StartAdornment, slotProps?.classes?.StartAdornment)} onClick={onAdormentClick}>
 								{startAdornment}
 							</button>}
-							<Combobox.Trigger className={clsx(styles.Trigger, slotProps?.classes?.Trigger)} aria-label="Open popup">
+							<Combobox.Trigger
+								key={triggerAnimationKey}
+								className={clsx(styles.Trigger, slotProps?.classes?.Trigger)}
+								data-selected={hasSingleValue}
+								aria-label="Open popup">
 								<ChevronDown className={clsx(styles.TriggerIcon, slotProps?.classes?.TriggerIcon)} />
 							</Combobox.Trigger>
 						</div>
@@ -152,14 +168,20 @@ export const ZCombobox = <Value, Multiple extends boolean | undefined = false>({
 								<Combobox.Item
 									key={index}
 									value={item}
-									className={clsx(styles.Item, slotProps?.classes?.Item)}>
-									{!slotProps?.disable?.checkIndicator &&
+									data-has-indicator={isIndicatorEnabled}
+									className={clsx(
+										styles.Item,
+										slotProps?.classes?.Item,
+										!isIndicatorEnabled && styles.ItemNoIndicator,
+										!isIndicatorEnabled && itemSelectedNoIndicatorClassName
+									)}>
+									{isIndicatorEnabled &&
 										<Combobox.ItemIndicator
 											className={clsx(styles.ItemIndicator, slotProps?.classes?.ItemIndicator)}>
 											<Check className={clsx(styles.ItemIndicatorIcon, slotProps?.classes?.ItemIndicatorIcon)} />
 										</Combobox.ItemIndicator>}
 									{itemComponent
-										? itemComponent(item)
+										? <div className={styles.ItemText}>{itemComponent(item)}</div>
 										: <div className={styles.ItemText}>{getItemLabel(item)}</div>}
 									{index < items.length - 1 && <Separator orientation="horizontal" className={styles.Separator} />}
 								</Combobox.Item>

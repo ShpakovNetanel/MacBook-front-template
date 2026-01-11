@@ -1,20 +1,36 @@
 @layer custom {
+    .Combobox {
+        visibility: hidden;
+
+        &[data-input-visible="true"] {
+            visibility: visible;
+        }
+    }
+
+    .Popup {
+        padding: 0;
+    }
+
     .Container {
         background: white;
         border-radius: 0.675rem;
         border: 2px solid var(--color-border);
         height: 5vh;
         width: var(--prefix-width);
-        margin-right: 0.5rem;
+        margin-right: var(--prefix-gap);
     }
 
-    .Chips{
+    .Chips {
+        position: relative;
         padding-right: 0.5rem;
+        padding-left: 2rem;
     }
 
-    .Trigger { 
-        right: var(--prefix-width);
-        margin-right: 0.5rem;
+    .Trigger {
+        left: 0.5rem;
+        right: auto;
+        top: 50%;
+        transform: translateY(-50%);
         width: 2rem;
 
         &:hover {
@@ -26,7 +42,7 @@
         color: black;
     }
 
-    .PlusIcon {
+    .Plus {
         width: 0.8rem;
         color: var(--report-color);
     }
@@ -36,8 +52,15 @@
         font-size: 0.8rem;
     }
 
-    .ItemIndicatorIcon {
-        height: 1rem;
-        width: 1rem;
+    .Item {
+        &[data-selected]::before,
+        &[data-highlighted]::before {
+            inset-inline: 0;
+            border-radius: 0;
+        }
+    }
+
+    .ItemNoIndicator[data-selected]::before {
+        width: 100%;
     }
 }

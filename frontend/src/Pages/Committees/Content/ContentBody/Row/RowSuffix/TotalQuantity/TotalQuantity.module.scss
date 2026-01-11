@@ -1,0 +1,39 @@
+@layer custom {
+    .Quantity {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: default;
+        user-select: none;
+    }
+
+    .MatkalAlloc {
+        display: flex;
+
+        .MatkalAllocLabel {
+            font-size: 1rem;
+            color: var(--quantity-color);
+            width: fit-content;
+            font-size: 1rem;
+            font-weight: bold;
+            font-family: "Heebo";
+        }
+
+        .MatkalAllocMeas {
+            margin-right: 1rem;
+            width: fit-content;
+            font-size: 1rem;
+            font-weight: bold;
+            font-family: "Heebo";
+            font-size: 1rem;
+        }
+    }
+
+    .NotAllocated {
+        width: fit-content;
+        font-size: 1rem;
+        font-weight: bold;
+        font-family: "Heebo";
+    }
+}

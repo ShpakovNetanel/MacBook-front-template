@@ -6,6 +6,8 @@ import { NumberedCell } from "./NumberedCell/NumberedCell";
 import { ZeroCell } from "./ZeroCell/ZeroCell";
 import styles from './Cell.module.scss';
 import { ZTyphography } from "../../../../../../../components/ZTypography/ZTypography";
+import { isNull } from "lodash";
+import { useState } from "react";
 
 type CellProps = {
     isSubRow: boolean;
@@ -16,6 +18,7 @@ type CellProps = {
 }
 
 export const Cell = ({ isSubRow, item, material, setOpenedUnit, openedUnit }: CellProps) => {
+    const [isCellHovered, setIsCellHovered] = useState(false);
     const reportType = useReportTypeStore(s => s.reportType);
 
     const reportChangeQuantity = useReportChangeStore(s => s.getReportChange({
@@ -37,7 +40,13 @@ export const Cell = ({ isSubRow, item, material, setOpenedUnit, openedUnit }: Ce
         });
     }
 
-    return <div data-subrow={isSubRow} className={styles.Cell}>
+    const isCellOpened = !isNull(openedUnit) && openedUnit.id === item.unit.id;
+
+    return <div
+        onMouseEnter={() => setIsCellHovered(true)}
+        onMouseLeave={() => setIsCellHovered(false)}
+        data-subrow={isSubRow}
+        className={styles.Cell}>
         {isSubRow && <ZTyphography slotProps={{
             classes: {
                 Label: styles.Label
@@ -45,9 +54,13 @@ export const Cell = ({ isSubRow, item, material, setOpenedUnit, openedUnit }: Ce
         }}>{item.unit.description}</ZTyphography>}
         {!cellQuantity
             ? <ZeroCell onChipClick={() => updateReportChangeQuantity(material.multiply)} />
-            : <NumberedCell quantity={cellQuantity} multiply={material.multiply} updateReportChange={updateReportChangeQuantity} />}
-        {item.unit.level !== 4 && <CellControlButtons openedUnit={openedUnit}
+            : <NumberedCell isCellOpened={isCellOpened}
+                quantity={cellQuantity}
+                multiply={material.multiply}
+                updateReportChange={updateReportChangeQuantity} />}
+        <CellControlButtons openedUnit={openedUnit}
             setOpenedUnit={setOpenedUnit}
-            unit={item.unit} />}
+            unit={item.unit}
+            isCellHovered={isCellHovered} />
     </div>
 }

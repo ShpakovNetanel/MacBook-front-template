@@ -4,13 +4,14 @@
     }
 
     .Suffix {
-        width: 10vw;
+        width: var(--suffix-width);
         display: flex;
         justify-content: end;
 
         .Icon {
             color: black;
             stroke-width: var(--icon-stroke-width);
+            cursor: pointer;
         }
     }
 }

@@ -7,12 +7,25 @@
         gap: 0;
     }
 
+    .Field[data-border-error="true"] {
+        .Group {
+            border-color: red;
+        }
+    }
+
+    .Field[data-cell-bolded="true"] {
+        .Group {
+            border-bottom: 3px solid rgba(0,0,0,0.5);
+            box-shadow: 0 6px 3px -3px rgb(205, 204, 204);
+        }
+    }
+
     .Input {
         width: calc(var(--cell-width) / 2);
         height: var(--cell-height);
         border: none;
         font-size: 0.8rem;
-
+        direction: ltr;
         &:focus {
             outline: none;
         }
@@ -20,7 +33,7 @@
 
     .Group {
         border-radius: 1rem;
-        background-color: #fdfdff;
+        background-color: #FDFDFF;
         border: 1px solid var(--color-border);
         padding: 0.25rem 0.25rem;
         justify-content: center;
@@ -36,9 +49,5 @@
         background: transparent;
         width: var(--icon-width);
         cursor: pointer;
-    }
-
-    .Icon {
-        background-color: black;
     }
 }

@@ -1,4 +1,4 @@
-import { Toggle } from "@base-ui-components/react";
+import { Separator, Toggle } from "@base-ui-components/react";
 import { Star } from "lucide-react";
 import { ZChip } from "../../../../../../components/ZChip/ZChip";
 import { ZTyphography } from "../../../../../../components/ZTypography/ZTypography";
@@ -14,11 +14,35 @@ export const MaterialSearchItem = ({ item }: MaterialSearchItemProps) => {
     return (
         <div className={styles.Item}>
             <div className={styles.Material}>
-                <ZTyphography>{item.id} - {item.nickname}</ZTyphography>
-                <ZTyphography>{item.description}</ZTyphography>
+                <div className={styles.MaterialTexts}>
+                    <ZTyphography slotProps={{
+                        classes: {
+                            Label: styles.MaterialTitle
+                        }
+                    }}>
+                        {item.id}
+                    </ZTyphography>
+                    <ZTyphography slotProps={{
+                        classes: {
+                            Label: styles.MaterialTitle
+                        }
+                    }}>
+                        {item.nickname}
+                    </ZTyphography>
+                    <ZTyphography slotProps={{
+                        classes: {
+                            Label: styles.MaterialDescription
+                        }
+                    }}>
+                        {item.description}
+                    </ZTyphography>
+                </div>
                 <ZChip label={item.category} slotProps={{
                     backgroundColor:
-                        stringToHslColor(item.category)
+                        stringToHslColor(item.category),
+                    classes: {
+                        Label: styles.Label
+                    }
                 }} />
             </div>
             <Toggle

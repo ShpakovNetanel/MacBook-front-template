@@ -1,10 +1,26 @@
 @layer custom {
-    .Icon {
+    .Control {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.2rem;
+        visibility: hidden;
+
+        &[data-show="true"] {
+            visibility: visible;
+        }
+    }
+
+    .SubRowOpener {
         width: 1rem;
         height: 1rem;
 
-        &[data-open] {
-            color: var(--report-color)
+        &[data-open="true"] {
+            color: var(--report-color);
         }
+    }
+
+    .ChildrenSum {
+        width: 1rem;
+        height: 1rem;
     }
 }

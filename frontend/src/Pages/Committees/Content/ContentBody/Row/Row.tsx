@@ -1,23 +1,27 @@
-import { useState } from "react";
-import type { Report, Unit } from "../../../../../types/types"
-import styles from './Row.module.scss'
-import { RowCells } from "./RowCells/RowCells";
-import { RowPrefix } from "./RowPrefix/RowPrefix"
-import { RowSuffix } from "./RowSuffix/RowSuffix";
-import { isNull } from "lodash";
-import { SubRow } from "./SubRow/SubRow";
-import { useUnitStore } from "../../../../../zustand/userUnit";
 import { Separator } from "@base-ui-components/react";
+import { isNull } from "lodash";
+import { useState } from "react";
+import type { Report, Unit } from "../../../../../types/types";
+import { useUnitStore } from "../../../../../zustand/userUnit";
+import styles from './Row.module.scss';
+import { RowCells } from "./RowCells/RowCells";
+import { RowPrefix } from "./RowPrefix/RowPrefix";
+import { RowSuffix } from "./RowSuffix/RowSuffix";
+import { SubRow } from "./SubRow/SubRow";
 
 type RowProps = {
     report: Report;
+    childrenToDisplay: Unit[];
+    transitionProps: Record<string, string>;
 }
 
-export const Row = ({ report }: RowProps) => {
+export const Row = ({
+    report,
+    childrenToDisplay,
+    transitionProps,
+}: RowProps) => {
     const [openedUnit, setOpenedUnit] = useState<null | Unit>(null)
     const screenUnit = useUnitStore(s => s.screenUnit);
-
-    console.log(1, { report });
 
     return (
         <div>
@@ -28,15 +32,16 @@ export const Row = ({ report }: RowProps) => {
                     upperUnit={screenUnit}
                     report={report}
                     setOpenedUnit={setOpenedUnit}
-                    openedUnit={openedUnit} />
+                    openedUnit={openedUnit}
+                    childrenToDisplay={childrenToDisplay}
+                    transitionProps={transitionProps} />
                 <RowSuffix report={report} />
             </div>
             {!isNull(openedUnit) &&
-                <>
-                    <Separator orientation="horizontal" className={styles.Separator} />
-                    <SubRow upperUnit={openedUnit}
-                        report={report} />
-                </>}
+                <SubRow key={openedUnit.id}
+                    upperUnit={openedUnit}
+                    report={report}
+                    transitionProps={transitionProps} />}
         </div>
     )
 }

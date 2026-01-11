@@ -1,23 +1,35 @@
-import { ChevronsDownUp, ChevronsUpDown, Network, Trees } from "lucide-react";
+import { Network, Sigma } from "lucide-react";
 import type { Unit } from "../../../../../../../../types/types";
+import { REPORT_TYPES } from "../../../../../../../../utils/MainConstants/ReportTypes";
+import { useReportTypeStore } from "../../../../../../../../zustand/reportType";
 import styles from './CellControlButtons.module.scss';
 
 type CellControlButtonsProps = {
     unit: Unit;
     setOpenedUnit: React.Dispatch<React.SetStateAction<Unit | null>>;
     openedUnit: Unit | null;
+    isCellHovered: boolean;
 }
 
-export const CellControlButtons = ({ openedUnit, setOpenedUnit, unit }: CellControlButtonsProps) => {
+export const CellControlButtons = ({ openedUnit, setOpenedUnit, unit, isCellHovered }: CellControlButtonsProps) => {
     const isUnitOpened = openedUnit?.id === unit.id;
+    const reportType = useReportTypeStore(s => s.reportType);
 
-    const onToggleClick = (unit: Unit | null) => {
-        setOpenedUnit(unit);
+    const onToggleClick = () => {
+        setOpenedUnit(isUnitOpened ? null : unit);
     }
 
-    return <div>
-        {isUnitOpened
-            ? <Network data-open={isUnitOpened} className={styles.Icon} onClick={() => onToggleClick(null)} />
-            : <Network className={styles.Icon} onClick={() => onToggleClick(unit)} />}
+    const show = (isCellHovered && unit.level !== 4)
+        || isUnitOpened
+
+    return <div
+        className={styles.Control}
+        data-show={show}>
+        <Network data-open={isUnitOpened}
+            data-show={unit.level !== 4}
+            className={styles.SubRowOpener}
+            onClick={onToggleClick} />
+        {reportType === REPORT_TYPES.TYPES.REQUISITION.id &&
+            <Sigma className={styles.ChildrenSum} />}
     </div>
 }

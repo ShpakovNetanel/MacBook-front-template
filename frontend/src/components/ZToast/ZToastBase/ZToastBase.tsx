@@ -1,11 +1,10 @@
 import { Toast } from "@base-ui-components/react";
-import clsx from "clsx";
-import type { SlotProps as ZToastButtonSlotProps } from './ZToastButton/ZToastButton';
+import type { ReactNode } from "react";
 import styles from './ZToastBase.module.scss';
+import type { SlotProps as ZToastButtonSlotProps } from './ZToastButton/ZToastButton';
 import { ZToastButton } from "./ZToastButton/ZToastButton";
 import type { SlotProps as ZToastListSlotProps } from './ZToastList/ZToastList';
 import { ZToastList } from "./ZToastList/ZToastList";
-import type { ReactNode } from "react";
 
 type Classes = {
     ViewPort?: keyof typeof styles;

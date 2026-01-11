@@ -1,20 +1,70 @@
 @layer custom {
     .Header {
         display: flex;
-        width: 95%;
+        width: 100%;
         margin: 0.5rem var(--row-margin);
+        padding: 0 var(--row-padding);
+        justify-content: space-between;
+        align-items: center;
+        user-select: none;
 
         .Units {
             display: flex;
-            width: 65vw;
-            justify-content: space-around;
+            width: var(--cells-width);
             min-height: 8%;
             align-items: center;
-            margin-right: 0.5rem;
-            
+            position: relative;
+
             .UnitDescription {
                 font-weight: 600;
+                user-select: none;
             }
+        }
+
+        .UnitLabels {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(var(--carousel-count), minmax(0, 1fr));
+            align-items: center;
+            justify-items: center;
+            transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+
+        .UnitLabels[data-starting-style][data-slide-direction="left"],
+        .UnitLabels[data-ending-style][data-slide-direction="left"] {
+            transform: translateX(-1.5rem);
+        }
+
+        .UnitLabels[data-starting-style][data-slide-direction="right"],
+        .UnitLabels[data-ending-style][data-slide-direction="right"] {
+            transform: translateX(1.5rem);
+        }
+
+        .ArrowLeft,
+        .ArrowRight {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            user-select: none;
+
+            &[data-disabled="true"] {
+                opacity: 0.4;
+                pointer-events: none;
+            }
+        }
+
+        .ArrowLeft {
+            left: calc(-1 * var(--carousel-arrow-offset));
+        }
+
+        .ArrowRight {
+            right: calc(-1 * var(--carousel-arrow-offset));
+        }
+
+        .SuffixSpacer {
+            width: var(--suffix-width);
         }
     }
 }

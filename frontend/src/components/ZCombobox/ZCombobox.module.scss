@@ -84,11 +84,24 @@
       color: var(--color-gray-700);
       background-color: var(--color-gray-100);
     }
+
+    &[data-selected="true"] {
+      animation: trigger-slide 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
   }
 
   .TriggerIcon {
     width: 1rem;
     height: 1rem;
+  }
+
+  @keyframes trigger-slide {
+    from {
+      transform: translateX(-0.75rem);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
 
   .Positioner {
@@ -178,6 +191,18 @@
 
   .ItemText {
     grid-column-start: 2;
+  }
+
+  .ItemNoIndicator {
+    grid-template-columns: 1fr;
+  }
+
+  .ItemNoIndicator .ItemText {
+    grid-column-start: 1;
+  }
+
+  .ItemNoIndicator[data-selected]::before {
+    background-color: var(--color-gray-100);
   }
 
   .ItemIndicator {

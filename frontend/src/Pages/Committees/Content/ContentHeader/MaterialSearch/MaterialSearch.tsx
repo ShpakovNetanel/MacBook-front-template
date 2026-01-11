@@ -10,6 +10,7 @@ import { useUnitStore } from "../../../../../zustand/userUnit";
 import { MaterialSearchItem } from "./MaterailSearchItem/MaterialSearchItem";
 import styles from './MaterialSearch.module.scss';
 import { MaterialSearchLabel } from "./MaterialSearchLabel/MaterialSearchLabel";
+import { useReportTypeStore } from "../../../../../zustand/reportType";
 
 type MaterialSearchProps = {
     setReports: React.Dispatch<React.SetStateAction<Report[]>>;
@@ -20,9 +21,10 @@ export const MaterialSearch = ({ setReports, reports }: MaterialSearchProps) => 
     const units = useFetchUnits();
     const materials = useFetchMaterials();
     const screenUnit = useUnitStore(s => s.screenUnit);
+    const reportType = useReportTypeStore(s => s.reportType);
     const [selectedMaterials, setSelectedMaterials] = useState<Material[]>([]);
     const addMaterialsChanges = useReportChangeStore(s => s.addMaterialsChanges);
-    
+
     const addMaterials = () => {
         const relevantReportTypes = REPORT_TYPES.getFunctions.getTypesWithMaterials();
         const screenUnitChildren = units.filter(unit => unit.parentId === screenUnit.id);
@@ -39,6 +41,7 @@ export const MaterialSearch = ({ setReports, reports }: MaterialSearchProps) => 
                             quantity: 0
                         }))
                     })),
+                    allocatedQuantity: null,
                     comment: ''
                 }));
 
@@ -47,17 +50,19 @@ export const MaterialSearch = ({ setReports, reports }: MaterialSearchProps) => 
         setSelectedMaterials([]);
     }
 
-    // 20000017 20000018
+    const showInput = REPORT_TYPES.getFunctions.getTypesWithMaterials().includes(reportType);
 
     return (
-        <div className={styles.Combobox}>
+        <div className={styles.Combobox}
+            data-input-visible={showInput}>
             <ZCombobox
                 value={selectedMaterials}
                 onValueChange={setSelectedMaterials}
                 isItemEqualToValue={(item, selectedItem) => item.id === selectedItem.id}
                 items={materials}
                 multiple
-                startAdornment={<Plus className={styles.PlusIcon} onClick={() => console.log('aaa')} />}
+                showItemIndicator={false}
+                startAdornment={<Plus className={styles.Plus} />}
                 onAdormentClick={addMaterials}
                 onPaste={(event) => {
                     const pastedValue = event.clipboardData.getData('text')
@@ -66,12 +71,14 @@ export const MaterialSearch = ({ setReports, reports }: MaterialSearchProps) => 
                 }}
                 slotProps={{
                     classes: {
+                        Checkbox: styles.Checkbox,
                         Container: styles.Container,
                         Chips: styles.Chips,
-                        ItemIndicatorIcon: styles.ItemIndicatorIcon,
                         Input: styles.Input,
                         Trigger: styles.Trigger,
-                        TriggerIcon: styles.TriggerIcon
+                        TriggerIcon: styles.TriggerIcon,
+                        Popup: styles.Popup,
+                        Item: styles.Item,
                     },
                 }}
                 placeholder='בחירת מק״ט'

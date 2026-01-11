@@ -51,5 +51,6 @@ export type ReportItem = {
 export type Report = {
     material: Material;
     comment: string;
+    allocatedQuantity: null | number;
     items: ReportItem[];
 }

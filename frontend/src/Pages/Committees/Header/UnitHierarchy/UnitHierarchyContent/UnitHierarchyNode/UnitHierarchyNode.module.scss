@@ -1,0 +1,11 @@
+@layer custom {
+    .UnitBlock {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Children {
+        display: flex;
+        flex-direction: column;
+    }
+}
