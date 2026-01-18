@@ -8,7 +8,6 @@ type UnitHierarchyNodeProps = {
     unit: Unit;
     depth: number;
     units: Unit[];
-    parentUnit: Unit;
     unitsByParent: Map<number | null, Unit[]>;
     openUnitIds: Set<number>;
     selectedUnitById: Record<number, Unit | null>;
@@ -17,6 +16,7 @@ type UnitHierarchyNodeProps = {
     toggleStatus: (unitId: number, statusId: number) => void;
     onDelete: (unitId: number) => void;
     onSelectUnit: (unitId: number, unit: Unit | null) => void;
+    onActivateUnit: (unitId: number) => void;
     pendingAction: { unitId: number; type: Actions; } | null;
     setPendingAction: React.Dispatch<React.SetStateAction<{ unitId: number; type: Actions; } | null>>;
 };
@@ -25,7 +25,6 @@ export const UnitHierarchyNode = ({
     unit,
     depth,
     units,
-    parentUnit,
     unitsByParent,
     openUnitIds,
     selectedUnitById,
@@ -34,6 +33,7 @@ export const UnitHierarchyNode = ({
     toggleStatus,
     onDelete,
     onSelectUnit,
+    onActivateUnit,
     pendingAction,
     setPendingAction
 }: UnitHierarchyNodeProps) => {
@@ -49,13 +49,13 @@ export const UnitHierarchyNode = ({
                 isVisible={unit.status.visibility === 'visible'}
                 statusId={unit.status.id}
                 units={units}
-                parentUnit={parentUnit}
                 selectedUnit={selectedUnitById[unit.id] ?? null}
                 onToggleOpen={() => toggleOpen(unit.id)}
                 onToggleVisibility={() => toggleVisibility(unit.id, unit.status.visibility === 'visible')}
                 onToggleStatus={() => toggleStatus(unit.id, unit.status.id)}
                 onDelete={() => onDelete(unit.id)}
                 onSelectUnit={(nextUnit) => onSelectUnit(unit.id, nextUnit)}
+                onActivateCombobox={() => onActivateUnit(unit.id)}
                 pendingAction={pendingAction}
                 setPendingAction={setPendingAction}
             />
@@ -65,7 +65,6 @@ export const UnitHierarchyNode = ({
                         <UnitHierarchyNode
                             key={child.id}
                             unit={child}
-                            parentUnit={unit}
                             depth={depth + 1}
                             units={units}
                             unitsByParent={unitsByParent}
@@ -76,6 +75,7 @@ export const UnitHierarchyNode = ({
                             toggleStatus={toggleStatus}
                             onDelete={onDelete}
                             onSelectUnit={onSelectUnit}
+                            onActivateUnit={onActivateUnit}
                             pendingAction={pendingAction}
                             setPendingAction={setPendingAction}
                         />

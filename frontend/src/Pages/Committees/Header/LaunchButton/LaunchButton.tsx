@@ -1,13 +1,17 @@
 import { Rocket } from "lucide-react";
-import { ZTooltip } from "../../../../components/ZTooltip/ZTooltip";
+import { Tooltip } from "../../../../components/Tooltip/Tooltip";
 import styles from './LaunchButton.module.scss';
 
 export const LaunchButton = () => {
     return (
-        <ZTooltip title="דיווח" slotProps={{
-            // outlineColor: 'black'
+        <Tooltip title="דיווח" slotProps={{
+            outlineColor: 'black',
+            boldType: 'BoxShadow',
+            classes: {
+                Panel: styles.Panel
+            }
         }}>
             <Rocket className={styles.Launch} />
-        </ZTooltip>
+        </Tooltip>
     )
 }

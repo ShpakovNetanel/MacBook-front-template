@@ -1,4 +1,4 @@
-import { ZTyphography } from "../../../../../components/ZTypography/ZTypography"
+import { Typhography } from "../../../../../components/Typography/Typography"
 import styles from './CategoryLabel.module.scss';
 
 type CategoryLabelProps = {
@@ -6,10 +6,10 @@ type CategoryLabelProps = {
 }
 
 export const CategoryLabel = ({ label }: CategoryLabelProps) => {
-    return <ZTyphography
+    return <Typhography
     slotProps={{ classes: {
         Label: styles.Label
     }}}>
         {label}
-    </ZTyphography>
+    </Typhography>
 }

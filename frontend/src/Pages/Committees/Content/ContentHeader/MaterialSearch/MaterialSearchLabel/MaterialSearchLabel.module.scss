@@ -5,12 +5,11 @@
         background-color: rgba(87, 74, 137, 0.3);
         color: white;
         border-radius: 0.5rem;
-        font-size: 0.875rem;
-        padding: 0.1rem 0.5rem;
-        max-width: 50%;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+        font-size: 0.75rem;
+        padding: 0.1rem 0.2rem;
+        max-width: 100%;
+        min-width: 0;
+
 
         @media (hover: hover) {
             &[data-highlighted] {
@@ -18,5 +17,13 @@
                 color: var(--color-gray-50);
             }
         }
+    }
+
+    .ChipText {
+        display: block;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }

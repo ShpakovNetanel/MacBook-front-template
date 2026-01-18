@@ -1,0 +1,74 @@
+@layer custom {
+    .DeleteTrigger {
+        border: none;
+        background-color: transparent;
+        user-select: none;
+        cursor: pointer;
+        padding: 0;
+
+        .Icon {
+            stroke-width: var(--icon-stroke-width);
+            width: var(--icon-width);
+        }
+    }
+
+    .DeleteBackdrop {
+        position: fixed;
+        inset: 0;
+        background-color: black;
+        opacity: 0.25;
+        transition: opacity 150ms ease-out;
+
+        &[data-starting-style],
+        &[data-ending-style] {
+            opacity: 0;
+        }
+    }
+
+    .DeletePopup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        width: min(90vw, 26rem);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+
+        &[data-starting-style],
+        &[data-ending-style] {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+    }
+
+    .DeleteTitle {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .DeleteDescription {
+        font-size: 0.875rem;
+        color: var(--color-gray-700);
+    }
+
+    .DeleteActions {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+    }
+
+    .DeleteButton {
+        border: none;
+        border-radius: 0.75rem;
+        padding: 0.5rem 0.75rem;
+        width: 10rem;
+        background-color: var(--report-color);
+        color: var(--color-gray-900);
+        cursor: pointer;
+    }
+}

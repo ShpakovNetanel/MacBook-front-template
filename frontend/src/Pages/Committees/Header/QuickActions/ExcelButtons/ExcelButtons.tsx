@@ -1,15 +1,15 @@
 import { FileSpreadsheet } from "lucide-react"
 import styles from "./ExcelButtons.module.scss"
-import { ZSpeedDialMenu } from "../../../../../components/ZSpeedDial/ZSpeedDialMenu/ZSpeedDialMenu"
-import { ZTooltip } from "../../../../../components/ZTooltip/ZTooltip"
+import { SpeedDialMenu } from "../../../../../components/SpeedDial/SpeedDialMenu/SpeedDialMenu"
+import { Tooltip } from "../../../../../components/Tooltip/Tooltip"
 
 export const ExcelButtons = () => {
     return (
         <div className={styles.Menu}>
-            <ZTooltip
+            <Tooltip
                 title="פקדי אקסל"
                 slotProps={{ side: 'right' }}>
-                <ZSpeedDialMenu
+                <SpeedDialMenu
                     items={['ייבוא מק״טים מקובץ אקסל', 'ייצוא מק״טים לקובץ אקסל']}
                     trigger={<FileSpreadsheet />}
                     slotProps={{
@@ -17,7 +17,7 @@ export const ExcelButtons = () => {
                             Button: styles.Button
                         }
                     }} />
-            </ZTooltip>
+            </Tooltip>
         </div>
     )
 }

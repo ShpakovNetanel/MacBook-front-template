@@ -1,4 +1,5 @@
-import { ZTyphography } from "../../../../../../../components/ZTypography/ZTypography";
+import { Typhography } from "../../../../../../../components/Typography/Typography";
+import styles from './MaterialMultiply.module.scss';
 
 type MaterialMultiplyProps = {
     multiply: number;
@@ -6,6 +7,10 @@ type MaterialMultiplyProps = {
 
 export const MaterialMultiply = ({ multiply }: MaterialMultiplyProps) => {
     return multiply !== 0 && multiply !== 1 && (
-        <ZTyphography>{`מגיע בכפולות של: ${multiply}`}</ZTyphography>
+        <Typhography slotProps={{
+            classes: {
+                Label: styles.Multiply
+            }
+        }}>{`מגיע בכפולות של: ${multiply}`}</Typhography>
     )
 }

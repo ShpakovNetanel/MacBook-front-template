@@ -1,15 +1,16 @@
-import { Dialog } from "@base-ui-components/react";
+import { Dialog as BaseDialog } from "@base-ui-components/react";
 import { MessageCircleMore, Save, Trash, X } from "lucide-react";
 import { useState } from "react";
-import { ZTyphography } from "../../../../../../../components/ZTypography/ZTypography";
+import { Typhography } from "../../../../../../../components/Typography/Typography";
 import type { Report } from "../../../../../../../types/types";
 import styles from './Comment.module.scss';
 
 type CommentProps = {
-    report: Report
+    report: Report;
+    screenUnitStatus: number;
 }
 
-export const Comment = ({ report }: CommentProps) => {
+export const Comment = ({ report, screenUnitStatus }: CommentProps) => {
     const [message, setMessage] = useState(report?.comment);
 
     const saveComment = () => {
@@ -20,32 +21,33 @@ export const Comment = ({ report }: CommentProps) => {
     }
 
     return (
-        <Dialog.Root>
-            <Dialog.Trigger className={styles.Button}>
-                <MessageCircleMore className={styles.Icon}/>
-            </Dialog.Trigger>
-            <Dialog.Portal>
-                <Dialog.Backdrop className={styles.Backdrop} />
-                <Dialog.Popup className={styles.Popup}>
+        <BaseDialog.Root>
+            <BaseDialog.Trigger className={styles.Button}>
+                <MessageCircleMore className={styles.Icon} />
+            </BaseDialog.Trigger>
+            <BaseDialog.Portal>
+                <BaseDialog.Backdrop className={styles.Backdrop} />
+                <BaseDialog.Popup className={styles.Popup}>
                     <div className={styles.Title}>
                         <div className={styles.Text}>
-                            <ZTyphography slotProps={{
+                            <Typhography slotProps={{
                                 classes: {
                                     Label: styles.Id
                                 }
-                            }}>{`הערה עבור מק״ט: ${report.material.id}`}</ZTyphography>
-                            <ZTyphography slotProps={{
+                            }}>{`הערה עבור מק״ט: ${report.material.id}`}</Typhography>
+                            <Typhography slotProps={{
                                 classes: {
                                     Label: styles.Description
                                 }
-                            }}>{report.material.description}</ZTyphography>
+                            }}>{report.material.description}</Typhography>
                         </div>
-                        <Dialog.Close className={styles.Close}>
+                        <BaseDialog.Close className={styles.Close}>
                             <X />
-                        </Dialog.Close>
+                        </BaseDialog.Close>
                     </div>
                     <div className={styles.Content}>
                         <textarea
+                            disabled={screenUnitStatus !== 0}
                             className={styles.Message}
                             placeholder={'כתוב כאן...'}
                             value={message}
@@ -53,22 +55,22 @@ export const Comment = ({ report }: CommentProps) => {
                         />
                     </div>
                     <div className={styles.Footer}>
-                        <ZTyphography slotProps={{
+                        <Typhography slotProps={{
                             classes: {
                                 Label: styles.Length
                             }
-                        }}>{`אורך ${message.length}/120`}</ZTyphography>
+                        }}>{`אורך ${message.length}/120`}</Typhography>
                         <div className={styles.Actions}>
-                            <Dialog.Close className={styles.Button} onClick={removeComment}>
+                            <BaseDialog.Close className={styles.Button} onClick={removeComment}>
                                 <Trash />
-                            </Dialog.Close>
-                            <Dialog.Close className={styles.Button} onClick={saveComment}>
+                            </BaseDialog.Close>
+                            <BaseDialog.Close className={styles.Button} onClick={saveComment}>
                                 <Save />
-                            </Dialog.Close>
+                            </BaseDialog.Close>
                         </div>
                     </div>
-                </Dialog.Popup>
-            </Dialog.Portal>
-        </Dialog.Root>
+                </BaseDialog.Popup>
+            </BaseDialog.Portal>
+        </BaseDialog.Root>
     );
 }

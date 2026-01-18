@@ -8,6 +8,7 @@ type RowCellsProps = {
     isSubRow: boolean;
     upperUnit: Unit;
     report: Report;
+    allReportItems?: Report["items"];
     openedUnit: Unit | null;
     setOpenedUnit: React.Dispatch<React.SetStateAction<Unit | null>>;
     childrenToDisplay: Unit[];
@@ -15,12 +16,14 @@ type RowCellsProps = {
 }
 
 export const RowCells = ({ isSubRow, upperUnit, report, openedUnit, setOpenedUnit,
+    allReportItems,
     childrenToDisplay,
     transitionProps
 }: RowCellsProps) => {
-    const cellReportsItems = report.items.filter(item => item.unit.parentId === upperUnit.id);
-    const reportTypes = REPORT_TYPES.getFunctions.getTypesWithMaterials();
+    const cellReportsItems = report.items.filter(item => item.unit.parent?.id === upperUnit.id);
+    const reportTypes = REPORT_TYPES.getFunctions.getReportingTypes();
     const itemByUnitId = new Map(cellReportsItems.map(item => [item.unit.id, item]));
+    const reportItems = allReportItems ?? report.items;
 
     const cellsReports = {
         ...report,
@@ -30,7 +33,8 @@ export const RowCells = ({ isSubRow, upperUnit, report, openedUnit, setOpenedUni
                 types: reportTypes.map(reportType => ({
                     comment: '',
                     id: reportType,
-                    quantity: 0
+                    quantity: 0,
+                    status: 'Active'
                 }))
             }))
             : childrenToDisplay?.map(unit => (
@@ -39,7 +43,8 @@ export const RowCells = ({ isSubRow, upperUnit, report, openedUnit, setOpenedUni
                     types: reportTypes.map(reportType => ({
                         comment: '',
                         id: reportType,
-                        quantity: 0
+                        quantity: 0,
+                        status: 'Active'
                     }))
                 }
             ))
@@ -52,6 +57,7 @@ export const RowCells = ({ isSubRow, upperUnit, report, openedUnit, setOpenedUni
                 isSubRow={isSubRow}
                 item={item}
                 material={report.material}
+                reportItems={reportItems}
                 setOpenedUnit={setOpenedUnit}
                 openedUnit={openedUnit} />)}
         </div>

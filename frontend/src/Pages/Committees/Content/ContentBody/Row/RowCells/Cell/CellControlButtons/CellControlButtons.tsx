@@ -30,6 +30,7 @@ export const CellControlButtons = ({ openedUnit, setOpenedUnit, unit, isCellHove
             className={styles.SubRowOpener}
             onClick={onToggleClick} />
         {reportType === REPORT_TYPES.TYPES.REQUISITION.id &&
-            <Sigma className={styles.ChildrenSum} />}
+            openedUnit?.id === unit.id &&
+            < Sigma className={styles.ChildrenSum} />}
     </div>
 }

@@ -15,7 +15,7 @@ type ReportTypeKeys = {
     }
 }
 
-export type ReportTypes = {
+export type REPORT_TYPE = {
     TYPES: {
         [key in keyof typeof ReportType]: ReportTypeKeys
     },
@@ -30,11 +30,12 @@ export type ReportTypes = {
     getFunctions: {
         getSeqNumber: (reportType: ReportType) => number;
         getTypes: () => ReportTypeKeys[];
-        getTypesWithMaterials: () => ReportType[];
+        getReportingTypes: () => ReportType[];
+        getAggregatedTypes: () => ReportType[];
     }
 }
 
-export const REPORT_TYPES: ReportTypes = {
+export const REPORT_TYPES: REPORT_TYPE = {
     TYPES: {
         REQUISITION: {
             id: 0,
@@ -84,6 +85,7 @@ export const REPORT_TYPES: ReportTypes = {
     getFunctions: {
         getSeqNumber: (reportTypeId: ReportType) => Object.values(REPORT_TYPES.TYPES).find(reportType => reportType.id === reportTypeId)?.seqNumber ?? 0,
         getTypes: () => Object.values(REPORT_TYPES.TYPES).sort((a, b) => a.seqNumber - b.seqNumber),
-        getTypesWithMaterials: () => [REPORT_TYPES.TYPES.USAGE.id, REPORT_TYPES.TYPES.INVENTORY.id, REPORT_TYPES.TYPES.REQUISITION.id]
-    }
+        getReportingTypes: () => [REPORT_TYPES.TYPES.USAGE.id, REPORT_TYPES.TYPES.INVENTORY.id, REPORT_TYPES.TYPES.REQUISITION.id],
+        getAggregatedTypes: () => [REPORT_TYPES.TYPES.USAGE.id, REPORT_TYPES.TYPES.INVENTORY.id]
+    },
 }

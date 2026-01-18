@@ -12,8 +12,8 @@ type Action = {
 }
 
 export const useUnitStore = create<State & Action>((set) => ({
-    rootUnit: { id: 0, description: "מטכ״ל", level: 0, simul: "0000", parentId: null, status: { id: 0, description: "בדיווח", visibility: "visible" } },
-    screenUnit: { id: 0, description: "מטכ״ל", level: 0, simul: "0000", parentId: null, status: { id: 0, description: "בדיווח", visibility: "visible" } },
+    rootUnit: { id: 0, description: "מטכ״ל", level: 0, simul: "0000", parent: null, status: { id: 0, description: "בדיווח", visibility: "visible" } },
+    screenUnit: { id: 0, description: "מטכ״ל", level: 0, simul: "0000", parent: null, status: { id: 0, description: "בדיווח", visibility: "visible" } },
     updateScreenUnit: (unit: Unit) => set(() => ({ screenUnit: unit })),
     updateRootUnit: (unit: Unit) => set(() => ({ rootUnit: unit })),
 }))

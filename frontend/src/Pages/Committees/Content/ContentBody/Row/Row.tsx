@@ -1,4 +1,3 @@
-import { Separator } from "@base-ui-components/react";
 import { isNull } from "lodash";
 import { useState } from "react";
 import type { Report, Unit } from "../../../../../types/types";
@@ -25,12 +24,17 @@ export const Row = ({
 
     return (
         <div>
-            <div className={styles.Row} data-row-open={!isNull(openedUnit)}>
+            <div
+                className={styles.Row}
+                data-row-open={!isNull(openedUnit)}
+                data-row-kind="row"
+                data-material-id={report.material.id}>
                 <RowPrefix material={report.material} />
                 <RowCells
                     isSubRow={false}
                     upperUnit={screenUnit}
                     report={report}
+                    allReportItems={report.items}
                     setOpenedUnit={setOpenedUnit}
                     openedUnit={openedUnit}
                     childrenToDisplay={childrenToDisplay}

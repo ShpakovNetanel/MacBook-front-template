@@ -1,4 +1,4 @@
-import { ZTyphography } from "../../../components/ZTypography/ZTypography";
+import { Typhography } from "../../../components/Typography/Typography";
 import styles from './ErrorPage.module.scss';
 
 type ErrorPageProps = {
@@ -7,10 +7,10 @@ type ErrorPageProps = {
 
 export const ErrorPage = ({ message }: ErrorPageProps) => {
     return <div className={styles.Page}>
-        <ZTyphography slotProps={{
+        <Typhography slotProps={{
             classes: {
                 Label: styles.Message
             }
-        }}>{message}</ZTyphography>
+        }}>{message}</Typhography>
     </div>
 }

@@ -6,34 +6,157 @@
         align-items: center;
         cursor: default;
         user-select: none;
-    }
 
-    .MatkalAlloc {
-        display: flex;
+        .MatkalAlloc {
+            display: flex;
 
-        .MatkalAllocLabel {
-            font-size: 1rem;
-            color: var(--quantity-color);
+            .MatkalAllocLabel {
+                font-size: 1rem;
+                color: var(--quantity-color);
+                width: fit-content;
+                font-size: 1rem;
+                font-weight: bold;
+                font-family: "Heebo";
+            }
+
+            .MatkalAllocMeas {
+                margin-right: 1rem;
+                width: fit-content;
+                font-size: 1rem;
+                font-weight: bold;
+                font-family: "Heebo";
+                font-size: 1rem;
+            }
+        }
+
+        .NotAllocated {
             width: fit-content;
             font-size: 1rem;
             font-weight: bold;
             font-family: "Heebo";
         }
 
-        .MatkalAllocMeas {
-            margin-right: 1rem;
-            width: fit-content;
-            font-size: 1rem;
-            font-weight: bold;
-            font-family: "Heebo";
-            font-size: 1rem;
-        }
-    }
+        .RequisitionTotalQuantity {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-left: 1rem;
 
-    .NotAllocated {
-        width: fit-content;
-        font-size: 1rem;
-        font-weight: bold;
-        font-family: "Heebo";
+            &[data-show-allocation="true"] {
+                gap: 0.2rem;
+            }
+
+            .RequisitionText {
+                font-family: "Heebo";
+                font-size: 1.3rem;
+                color: #75769a;
+
+                &[data-show-allocation] {
+                    font-size: 0.9rem;
+                }
+            }
+
+            .RequisitionQuantity {
+                font-size: 1.3rem;
+                color: black;
+                font-weight: 600;
+
+                &[data-show-allocation] {
+                    font-size: 0.9rem;
+                    color: #75769a;
+                }
+            }
+        }
+
+        .Received {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+
+            .ReceivedCell {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+                width: 4.5rem;
+
+                .ReceivedQuantity {
+                    width: fit-content;
+                    font-size: 1rem;
+                    font-weight: bold;
+                }
+
+                .ReceivedText {
+                    font-size: 1rem;
+                    color: #75769a;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .Divider {
+            margin-top: -0.5rem;
+            font-size: 2rem;
+        }
+
+        .Allocation {
+            display: flex;
+            width: 6rem;
+
+            .AllocationCell {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 4.5rem;
+
+                .AllocationQuantity {
+                    width: fit-content;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    color: var(--quantity-color);
+                }
+
+                .AllocationText {
+                    font-size: 1rem;
+                    color: #75769a;
+                    font-weight: 500;
+                }
+            }
+
+            .AllocationUOM {
+                width: fit-content;
+                font-size: 1rem;
+                font-weight: bold;
+                margin-right: 1rem;
+                width: 0.5rem;
+            }
+        }
+        .ReportTotalQuantity {
+            display: flex;
+            gap: 0.2rem;
+            justify-content: flex-start;
+
+            .ReportQuantity {
+                width: fit-content;
+                font-size: 1.3rem;
+                font-weight: bold;
+                color: var(--quantity-color);
+
+                &[data-is-allocation] {
+                    font-size: 1rem;
+                }
+            }
+
+            .ReportUOM {
+                width: fit-content;
+                font-size: 1.3rem;
+                font-weight: bold;
+                margin-right: 1rem;
+
+                &[data-is-allocation] {
+                    font-size: 1rem;
+                }
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-import { ZTyphography } from "../../../../../../components/ZTypography/ZTypography";
+import { Typhography } from "../../../../../../components/Typography/Typography";
 import type { Material } from "../../../../../../types/types";
 import { MaterialMultiply } from "./MaterialMultiply/MaterialMultiply";
 import styles from './RowPrefix.module.scss';
@@ -10,15 +10,23 @@ type RowPrefixProps = {
 export const RowPrefix = ({ material }: RowPrefixProps) => {
     return <div className={styles.Prefix}>
         <div className={styles.MaterialId}>
-            <ZTyphography>{material.id}</ZTyphography>
-            <ZTyphography>-</ZTyphography>
-            <ZTyphography slotProps={{
+            <Typhography slotProps={{
+                classes: {
+                    Label: styles.Id
+                }
+            }}>{material.id}</Typhography>
+            <Typhography>-</Typhography>
+            <Typhography slotProps={{
                 classes: {
                     Label: styles.Nickname
                 }
-            }}>{material.nickname}</ZTyphography>
+            }}>{material.nickname}</Typhography>
         </div>
-        <ZTyphography>{material.description}</ZTyphography>
+        <Typhography slotProps={{
+            classes: {
+                Label: styles.Description
+            }
+        }}>{material.description}</Typhography>
         <MaterialMultiply multiply={material.multiply}/>
     </div>
 }

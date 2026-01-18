@@ -1,4 +1,11 @@
-.Launch {
-    color: white;
-    stroke-width: 1.5px;
+@layer custom {
+    .Panel {
+        padding: 0;
+    }
+
+    .Launch {
+        color: white;
+        stroke-width: 1.5px;
+        cursor: pointer;
+    }
 }

@@ -1,4 +1,11 @@
-.Save {
-    color: white;
-    stroke-width: 1.5px;
+@layer custom {
+    .Panel {
+        padding: 0;
+    }
+    
+    .Save {
+        color: white;
+        stroke-width: 1.5px;
+        cursor: pointer;
+    }
 }

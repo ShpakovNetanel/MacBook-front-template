@@ -1,7 +1,7 @@
-import { Separator, Toggle } from "@base-ui-components/react";
+import { Toggle as BaseToggle } from "@base-ui-components/react";
 import { Star } from "lucide-react";
-import { ZChip } from "../../../../../../components/ZChip/ZChip";
-import { ZTyphography } from "../../../../../../components/ZTypography/ZTypography";
+import { Chip } from "../../../../../../components/Chip/Chip";
+import { Typhography } from "../../../../../../components/Typography/Typography";
 import type { Material } from "../../../../../../types/types";
 import { stringToHslColor } from "../../../../../../utils/stringToColor";
 import styles from './MaterialSearchItem.module.scss';
@@ -15,29 +15,29 @@ export const MaterialSearchItem = ({ item }: MaterialSearchItemProps) => {
         <div className={styles.Item}>
             <div className={styles.Material}>
                 <div className={styles.MaterialTexts}>
-                    <ZTyphography slotProps={{
+                    <Typhography slotProps={{
                         classes: {
                             Label: styles.MaterialTitle
                         }
                     }}>
                         {item.id}
-                    </ZTyphography>
-                    <ZTyphography slotProps={{
+                    </Typhography>
+                    <Typhography slotProps={{
                         classes: {
                             Label: styles.MaterialTitle
                         }
                     }}>
                         {item.nickname}
-                    </ZTyphography>
-                    <ZTyphography slotProps={{
+                    </Typhography>
+                    <Typhography slotProps={{
                         classes: {
                             Label: styles.MaterialDescription
                         }
                     }}>
                         {item.description}
-                    </ZTyphography>
+                    </Typhography>
                 </div>
-                <ZChip label={item.category} slotProps={{
+                <Chip label={item.category} slotProps={{
                     backgroundColor:
                         stringToHslColor(item.category),
                     classes: {
@@ -45,7 +45,7 @@ export const MaterialSearchItem = ({ item }: MaterialSearchItemProps) => {
                     }
                 }} />
             </div>
-            <Toggle
+            <BaseToggle
                 className={styles.Toggle}
                 render={(propsRaw, state) => {
                     const props = {

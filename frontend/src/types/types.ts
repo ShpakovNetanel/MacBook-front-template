@@ -1,5 +1,6 @@
 import type { ReportType } from "../utils/MainConstants/ReportTypes";
 
+export type ReportStatus = 'Active' | 'Disabled'
 export type Direction = 'left' | 'right' | 'top' | 'bottom';
 
 export type Material = {
@@ -18,6 +19,7 @@ export type ReportChangeKey = {
 }
 
 export type ReportChange = ReportChangeKey & ({
+    status: ReportStatus;
     quantity?: number;
     comment?: string;
 });
@@ -33,7 +35,7 @@ export type Unit = {
     description: string;
     level: number;
     simul: string;
-    parentId: number | null;
+    parent?: Unit | null;
     status: UnitStatus;
 };
 
@@ -41,6 +43,7 @@ export type ReportItemType = {
     id: ReportType;
     quantity: number;
     comment: string;
+    status: ReportStatus;
 }
 
 export type ReportItem = {

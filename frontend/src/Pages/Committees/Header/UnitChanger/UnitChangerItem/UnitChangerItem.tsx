@@ -1,5 +1,5 @@
-import { ZChip } from "../../../../../components/ZChip/ZChip";
-import { ZTyphography } from "../../../../../components/ZTypography/ZTypography";
+import { Chip } from "../../../../../components/Chip/Chip";
+import { Typhography } from "../../../../../components/Typography/Typography";
 import type { Unit } from "../../../../../types/types";
 import { stringToHslColor } from "../../../../../utils/stringToColor";
 import { unitLevelToString } from "../../../../../utils/unitFunctions";
@@ -12,10 +12,10 @@ type UnitChangerItemProps = {
 export const UnitChangerItem = ({ unit }: UnitChangerItemProps) => {
     return (
         <div className={styles.Item}>
-            <ZTyphography>
+            <Typhography>
                 {`${unit.simul} - ${unit.description}`}
-            </ZTyphography>
-            <ZChip label={unitLevelToString(unit.level)}
+            </Typhography>
+            <Chip label={unitLevelToString(unit.level)}
                 slotProps={{
                     backgroundColor: stringToHslColor(unit.level.toString())
                 }} />

@@ -1,14 +1,17 @@
 import { Save } from "lucide-react"
 import styles from './SaveButton.module.scss';
-import { ZTooltip } from "../../../../components/ZTooltip/ZTooltip";
+import { Tooltip } from "../../../../components/Tooltip/Tooltip";
 
 export const SaveButton = () => {
     return (
-        <ZTooltip title="שמירה" slotProps={{
+        <Tooltip title="שמירה" slotProps={{
             boldType: 'BoxShadow',
-            outlineColor: 'black'
+            outlineColor: 'black',
+            classes: {
+                Panel: styles.Panel
+            }
         }}>
             <Save className={styles.Save} />
-        </ZTooltip>
+        </Tooltip>
     )
 }

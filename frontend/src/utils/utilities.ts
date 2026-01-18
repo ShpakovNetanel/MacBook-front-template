@@ -1,5 +1,5 @@
 import { isPlainObject } from "lodash"
-import type { ValueLabelPair } from "../components/ZCombobox/ZCombobox"
+import type { ValueLabelPair } from "../components/Combobox/Combobox"
 
 export function isValueLabelPair(item: unknown):
     item is ValueLabelPair {

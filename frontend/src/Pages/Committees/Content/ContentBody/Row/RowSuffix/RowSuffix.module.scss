@@ -1,17 +1,26 @@
 @layer custom {
     :root {
         --icon-stroke-width: 1.5px;
+        --icon-width: 1.25rem;
     }
 
     .Suffix {
         width: var(--suffix-width);
         display: flex;
-        justify-content: end;
+        align-items: center;
+        justify-content: space-between;
 
-        .Icon {
-            color: black;
-            stroke-width: var(--icon-stroke-width);
-            cursor: pointer;
+        .Icons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            .Icon {
+                color: black;
+                stroke-width: var(--icon-stroke-width);
+                cursor: pointer;
+                width: var(--icon-width);
+            }
         }
     }
 }

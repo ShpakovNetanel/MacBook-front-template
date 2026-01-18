@@ -1,0 +1,237 @@
+@layer custom {
+    .Row {
+        box-sizing: border-box;
+        border-bottom: 2px dashed var(--color-border);
+        display: flex;
+        align-items: center;
+        height: 2.75rem;
+        direction: rtl;
+        --color-opacity: calc(var(--row-depth) * 0.02);
+        background-color: rgb(0, 0, 0, var(--color-opacity));
+    }
+
+    .Field {
+        position: relative;
+        flex: 1;
+        min-width: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: rgb(0, 0, 0, var(--color-opacity));
+        padding-inline-start: 0.5rem;
+        box-sizing: border-box;
+    }
+
+    .Trigger {
+        order: 5;
+        width: 2rem;
+        height: 2rem;
+        border: none;
+        background: transparent;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--color-gray-600);
+    }
+
+    .TriggerIcon {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .Input {
+        order: 2;
+        flex: 1;
+        min-width: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        font-size: 0.85rem;
+        color: black;
+        padding-inline: 0.5rem;
+        background-color: transparent;
+    }
+
+    .InputWithLabel {
+        padding-right: 13rem;
+    }
+
+    .PlusButton {
+        order: 1;
+        width: 2rem;
+        height: 2rem;
+        border: none;
+        background: transparent;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #6cc275;
+    }
+
+    .PlusIcon {
+        width: 1rem;
+        height: 1rem;
+        color: var(--report-color);
+        stroke-width: 0.25rem;
+    }
+
+    .Popup {
+        background: canvas;
+        border-radius: 0.5rem;
+        border: 1px solid var(--color-gray-200);
+        box-shadow:
+            0 10px 15px -3px var(--color-gray-200),
+            0 4px 6px -4px var(--color-gray-200);
+        max-height: 16rem;
+        overflow-y: auto;
+        padding: 0.35rem 0;
+    }
+
+    .Positioner {
+        z-index: 2000;
+        width: var(--anchor-width);
+    }
+
+    .List {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+    }
+
+    .Empty {
+        font-size: 0.85rem;
+        color: var(--color-gray-600);
+        padding: 0.5rem 0.75rem;
+    }
+
+    .Item {
+        width: 100%;
+        text-align: right;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+        color: var(--color-gray-900);
+    }
+
+    .Item:hover {
+        background-color: var(--color-gray-100);
+    }
+
+    .StatusInline {
+        order: 3;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.25rem 0.65rem;
+        border-radius: 0.5rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        pointer-events: none;
+        max-width: calc(100% - 9.5rem);
+        animation: status-pop 720ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .ClearButton {
+        order: 4;
+        border: none;
+        background: transparent;
+        color: var(--color-gray-700);
+        font-size: 0.85rem;
+        cursor: pointer;
+        white-space: nowrap;
+        visibility: hidden;
+
+        &[data-hide="true"] {
+            visibility: visible;
+        }
+    }
+
+    .ClearIcon {
+        width: 1rem;
+    }
+
+    .StatusText {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .StatusActive,
+    .StatusLocked {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .StatusActive {
+        background-color: #fff3a8;
+        color: #6f5200;
+    }
+
+    .StatusLocked {
+        background-color: #ffd6d6;
+        color: #7a0010;
+    }
+
+    .StatusIcon {
+        width: 0.9rem;
+        height: 0.9rem;
+        flex: 0 0 auto;
+    }
+
+    @keyframes status-pop {
+        from {
+            opacity: 0;
+            transform: translateX(0.5rem);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .StatusInline {
+            animation: none;
+        }
+    }
+
+    .ActionButton {
+        height: 100%;
+        border: none;
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 0.35rem 0.9rem;
+        font-weight: 600;
+        width: 4rem;
+        cursor: pointer;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 10rem;
+        overflow: hidden;
+        margin-inline-start: auto;
+        background-color: #6cc275;
+        color: white;
+        transition:
+            transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+            max-width 520ms cubic-bezier(0.22, 1, 0.36, 1),
+            padding 520ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .ActionButton[data-visible="false"] {
+        opacity: 0;
+        transform: translateX(-1.25rem);
+        max-width: 0;
+        padding: 0;
+        pointer-events: none;
+    }
+}

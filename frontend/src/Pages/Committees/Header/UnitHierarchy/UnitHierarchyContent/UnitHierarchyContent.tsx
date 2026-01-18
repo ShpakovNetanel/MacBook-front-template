@@ -14,6 +14,7 @@ type UnitHierarchyContentProps = {
     toggleStatus: (unitId: number, statusId: number) => void;
     onDelete: (unitId: number) => void;
     onSelectUnit: (unitId: number, unit: Unit | null) => void;
+    onActivateUnit: (unitId: number) => void;
 };
 
 export type Actions = 'delete' | 'visibility' | 'status'
@@ -32,7 +33,8 @@ export const UnitHierarchyContent = ({
     toggleVisibility,
     toggleStatus,
     onDelete,
-    onSelectUnit
+    onSelectUnit,
+    onActivateUnit
 }: UnitHierarchyContentProps) => {
     const [pendingAction, setPendingAction] = useState<PendingAction>(null);
     const screenUnit = useUnitStore(s => s.screenUnit);
@@ -49,7 +51,6 @@ export const UnitHierarchyContent = ({
                         unit={unit}
                         depth={0}
                         units={units}
-                        parentUnit={screenUnit}
                         unitsByParent={unitsByParent}
                         openUnitIds={openUnitIds}
                         selectedUnitById={selectedUnitById}
@@ -58,6 +59,7 @@ export const UnitHierarchyContent = ({
                         toggleStatus={toggleStatus}
                         onDelete={onDelete}
                         onSelectUnit={onSelectUnit}
+                        onActivateUnit={onActivateUnit}
                         pendingAction={pendingAction}
                         setPendingAction={setPendingAction}
                     />

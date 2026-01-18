@@ -2,10 +2,29 @@
     .SubRow {
         padding: 0 var(--row-padding);
         height: var(--row-height);
-        border-radius: 0 0 3rem 3rem;
+        border-radius: 0 0 1rem 1rem;
         background-color: var(--row-color);
-
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: var(--row-width);
+        margin: 0 auto;
+        
         &[data-subrow-open="true"] {
+            border-radius: 0;
+        }
+
+        &[data-flash="true"]::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0 0 1rem 1rem;
+            pointer-events: none;
+            animation: subrow-flash 1.1s ease-out;
+        }
+
+        &[data-subrow-open="true"][data-flash="true"]::before {
             border-radius: 0;
         }
     }
@@ -15,8 +34,21 @@
     }
 
     .Separator {
-        background-color: #E9EDFE;
+        background-color: black;
         height: 0.5px;
-        width: 95%;
+        width: var(--cells-width);
+        margin: 0 auto;
+    }
+
+    @keyframes subrow-flash {
+        0% {
+            background-color: rgba(214, 255, 207, 0);
+        }
+        40% {
+            background-color: rgba(214, 255, 207, 0.85);
+        }
+        100% {
+            background-color: rgba(214, 255, 207, 0);
+        }
     }
 }

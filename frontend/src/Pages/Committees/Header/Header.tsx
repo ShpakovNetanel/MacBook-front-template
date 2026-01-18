@@ -1,6 +1,6 @@
-import { Separator } from '@base-ui-components/react';
+import { Separator as BaseSeparator } from '@base-ui-components/react';
 import { useState } from 'react';
-import { ZDatePicker } from '../../../components/ZDatePicker/ZDatePicker';
+import { DatePicker } from '../../../components/DatePicker/DatePicker';
 import styles from './Header.module.scss';
 import { LaunchButton } from './LaunchButton/LaunchButton';
 import { QuickActions } from './QuickActions/QuickActions';
@@ -16,17 +16,18 @@ export const Header = () => {
         <div className={styles.Header}>
             <div className={styles.Right}>
                 <UnitHierarchy />
-                <Separator orientation='vertical' className={styles.Separator} />
+                <BaseSeparator orientation='vertical' className={styles.Separator} />
                 <ReportTypes />
             </div>
             <div className={styles.Left}>
                 <SaveButton />
                 <LaunchButton />
-                <Separator orientation='vertical' className={styles.Separator} />
+                <BaseSeparator orientation='vertical' className={styles.Separator} />
                 <UnitChanger />
-                <Separator orientation='vertical' className={styles.Separator} />
-                <ZDatePicker value={screenDate}
-                    setValue={setScreenDate} />
+                <BaseSeparator orientation='vertical' className={styles.Separator} />
+                <DatePicker value={screenDate}
+                    setValue={setScreenDate} 
+                    dateFormat='dd.MM.yyyy'/>
                 <QuickActions />
             </div>
         </div>

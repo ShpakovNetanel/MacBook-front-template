@@ -1,4 +1,4 @@
-import { ZTyphography } from '../../../../components/ZTypography/ZTypography';
+import { Typhography } from '../../../../components/Typography/Typography';
 import { MaterialSearch } from './MaterialSearch/MaterialSearch';
 import styles from './ContentHeader.module.scss';
 import type { Report, Unit } from '../../../../types/types';
@@ -35,13 +35,13 @@ export const ContentHeader = ({ childrenToDisplay, setReports, reports,
                 )}
                 <div className={styles.UnitLabels} {...transitionProps}>
                     {childrenToDisplay.map((unit, index) => (
-                        <ZTyphography key={index} slotProps={{
+                        <Typhography key={index} slotProps={{
                             classes: {
                                 Label: styles.UnitDescription
                             }
                         }}>
                             {unit.description}
-                        </ZTyphography>
+                        </Typhography>
                     ))}
                 </div>
                 {showCarrousel && (

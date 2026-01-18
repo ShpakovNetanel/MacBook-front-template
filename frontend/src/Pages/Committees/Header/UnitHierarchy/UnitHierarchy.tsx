@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useFetchUnits } from '../../../../api/units';
-import { ZDrawer } from '../../../../components/ZDrawer/ZDrawer';
+import { Drawer } from '../../../../components/Drawer/Drawer';
 import type { Unit } from '../../../../types/types';
 import styles from './UnitHierarchy.module.scss';
 import { UnitHierarchyContent } from './UnitHierarchyContent/UnitHierarchyContent';
@@ -15,7 +15,7 @@ export const UnitHierarchy = () => {
     const unitsByParent = useMemo(() => {
         const map = new Map<number | null, Unit[]>();
         units.forEach((unit) => {
-            const parentKey = unit.parentId ?? null;
+            const parentKey = unit.parent?.id ?? null;
             const siblings = map.get(parentKey) ?? [];
             siblings.push(unit);
             map.set(parentKey, siblings);
@@ -55,14 +55,15 @@ export const UnitHierarchy = () => {
     };
 
     return (
-        <ZDrawer
+        <Drawer
             slotProps={{
                 direction: 'right',
                 classes: {
                     Trigger: styles.Trigger,
                     Icon: styles.Icon,
                     Drawer: styles.Drawer
-                }
+                },
+                width: '40vw'
             }}>
             <div className={styles.DrawerContent}>
                 <UnitHierarchyContent
@@ -75,13 +76,16 @@ export const UnitHierarchy = () => {
                     toggleStatus={toggleStatus}
                     onDelete={handleDelete}
                     onSelectUnit={(unitId, unit) => {
-                        setSelectedUnitById((prev) => ({
-                            ...prev,
-                            [unitId]: unit
-                        }));
+                        setSelectedUnitById(() => (unit ? { [unitId]: unit } : {}));
+                    }}
+                    onActivateUnit={(unitId) => {
+                        setSelectedUnitById((prev) => {
+                            const currentSelection = prev[unitId] ?? null;
+                            return currentSelection ? { [unitId]: currentSelection } : {};
+                        });
                     }}
                 />
             </div>
-        </ZDrawer>
+        </Drawer>
     );
 };

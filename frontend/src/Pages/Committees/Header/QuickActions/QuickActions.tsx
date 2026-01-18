@@ -1,7 +1,8 @@
 import { EllipsisVertical } from "lucide-react"
-import { ZSpeedDial, type SpeedDialItem } from "../../../../components/ZSpeedDial/ZSpeedDial"
+import { SpeedDial, type SpeedDialItem } from "../../../../components/SpeedDial/SpeedDial"
 import { ExcelButtons } from "./ExcelButtons/ExcelButtons";
 import { MaterialPresets } from "./MaterialPresets/MaterialPresets";
+import styles from './QuickActions.module.scss';
 
 export const QuickActions = () => {
     const actions: SpeedDialItem[] = [
@@ -16,7 +17,7 @@ export const QuickActions = () => {
     ];
 
     return (
-        <ZSpeedDial items={actions}
-            trigger={<EllipsisVertical />} />
+        <SpeedDial items={actions}
+            trigger={<EllipsisVertical className={styles.Trigger}/>} />
     )
 }

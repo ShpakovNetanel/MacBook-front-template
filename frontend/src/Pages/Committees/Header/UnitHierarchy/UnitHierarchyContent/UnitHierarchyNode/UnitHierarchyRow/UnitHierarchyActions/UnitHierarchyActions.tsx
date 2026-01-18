@@ -1,14 +1,15 @@
 import { Eye, EyeOff, KeyRound, Lock, Trash2 } from 'lucide-react';
-import { ZTooltip } from '../../../../../../../../components/ZTooltip/ZTooltip';
+import { Tooltip } from '../../../../../../../../components/Tooltip/Tooltip';
 import type { Unit } from '../../../../../../../../types/types';
 import styles from './UnitHierarchyActions.module.scss';
+import { useUnitStore } from '../../../../../../../../zustand/userUnit';
+import { UNIT_STATUSES } from '../../../../../../../../utils/MainConstants/UnitStatuses';
 
 type UnitHierarchyActionsProps = {
     isVisible: boolean;
     statusId: number;
-    parentUnit: Unit;
-    showVisibility: boolean;
-    onRequestVisibility: () => void;
+    unit: Unit;
+    onToggleVisibility: () => void;
     onRequestStatus: () => void;
     onRequestDelete: () => void;
 };
@@ -16,43 +17,43 @@ type UnitHierarchyActionsProps = {
 export const UnitHierarchyActions = ({
     isVisible,
     statusId,
-    showVisibility,
-    parentUnit,
-    onRequestVisibility,
+    unit,
+    onToggleVisibility,
     onRequestStatus,
     onRequestDelete
 }: UnitHierarchyActionsProps) => {
+    const screenUnit = useUnitStore(s => s.screenUnit);
     const tooltipSlotProps = { classes: { Popup: styles.TooltipPopup } };
+
+    const showVisibility = unit.status.id === UNIT_STATUSES.WAITING_FOR_ALLOCATION.id &&
+        unit.parent?.id === screenUnit.id
 
     return (
         <div className={styles.Actions} data-actions>
             {showVisibility && (
-                <ZTooltip title={isVisible ? 'הסתר יחידה' : 'הצג יחידה'} slotProps={tooltipSlotProps}>
-                    <button
-                        type="button"
+                <Tooltip title={isVisible ? 'הסתר יחידה' : 'הצג יחידה'} slotProps={tooltipSlotProps}>
+                    <div
                         className={styles.IconButton}
-                        onClick={onRequestVisibility}>
+                        onClick={onToggleVisibility}>
                         {isVisible ? <Eye /> : <EyeOff />}
-                    </button>
-                </ZTooltip>
+                    </div>
+                </Tooltip>
             )}
-            {parentUnit.status.id === 0 &&
+            {unit.parent?.status?.id === 0 &&
                 <>
-                    <ZTooltip title={statusId === 1 ? 'פתח יחידה' : 'נעל יחידה'} slotProps={tooltipSlotProps}>
-                        <button
-                            type="button"
+                    <Tooltip title={statusId === 1 ? 'פתח יחידה' : 'נעל יחידה'} slotProps={tooltipSlotProps}>
+                        <div
                             className={styles.IconButton}
                             onClick={onRequestStatus}>
                             {statusId === 1 ? <KeyRound /> : <Lock />}
-                        </button>
-                    </ZTooltip>
-                    <ZTooltip title='מחק קשר'>
-                        <button type="button"
-                            className={styles.IconButton}
+                        </div>
+                    </Tooltip>
+                    <Tooltip title='מחק קשר'>
+                        <div className={styles.IconButton}
                             onClick={onRequestDelete}>
                             <Trash2 />
-                        </button>
-                    </ZTooltip>
+                        </div>
+                    </Tooltip>
                 </>
             }
         </div>

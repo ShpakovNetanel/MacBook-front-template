@@ -1,0 +1,48 @@
+@layer base {
+    .List {
+        display: flex;
+        position: relative;
+        z-index: 0;
+        padding-inline: 0.25rem;
+        gap: 0.8rem;
+    }
+
+    .Tab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: none;
+        color: white;
+        font-family: inherit;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 600;
+        user-select: none;
+        white-space: nowrap;
+        word-break: keep-all;
+        padding-block: 0;
+        padding: 0;
+        height: 2rem;
+        cursor: pointer;
+
+        &[data-active] {
+            color: var(--tab-color);
+            border-bottom: 2px solid var(--tab-color);
+        }
+    }
+
+    .Indicator {
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 50%;
+        translate: var(--active-tab-left) -50%;
+        width: var(--active-tab-width);
+        height: 1.5rem;
+        border-radius: 0.25rem;
+        transition-property: translate, width;
+        transition-duration: 200ms;
+        transition-timing-function: ease-in-out;
+    }
+}

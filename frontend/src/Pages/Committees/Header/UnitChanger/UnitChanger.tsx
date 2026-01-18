@@ -1,11 +1,11 @@
 import toast from "react-hot-toast";
 import { useFetchUnits } from "../../../../api/units";
-import { ZCombobox } from "../../../../components/ZCombobox/ZCombobox";
+import { Combobox } from "../../../../components/Combobox/Combobox";
 import type { Unit } from "../../../../types/types";
 import { useUnitStore } from "../../../../zustand/userUnit";
 import styles from './UnitChanger.module.scss';
 import { UnitChangerItem } from "./UnitChangerItem/UnitChangerItem";
-import { ZChip } from "../../../../components/ZChip/ZChip";
+import { Chip } from "../../../../components/Chip/Chip";
 import { X } from "lucide-react";
 
 export const UnitChanger = () => {
@@ -24,7 +24,7 @@ export const UnitChanger = () => {
     }
 
     return <>
-        <ZCombobox
+        <Combobox
             items={units}
             placeholder={screenUnit.description}
             value={screenUnit}
@@ -40,8 +40,6 @@ export const UnitChanger = () => {
                 classes: {
                     Container: styles.Container,
                     Input: styles.Input,
-                    InputWrapper: styles.InputWrapper,
-                    Clear: styles.Clear,
                     ActionButtons: styles.ActionButtons,
                     Trigger: styles.Trigger,
                     TriggerIcon: styles.TriggerIcon
@@ -50,7 +48,7 @@ export const UnitChanger = () => {
                     checkIndicator: true
                 }
             }} />
-        <ZChip label={screenUnit.status.description} slotProps={{
+        <Chip label={screenUnit.status.description} slotProps={{
             backgroundColor: 'white',
             classes: {
                 Label: styles.Label

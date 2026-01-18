@@ -13,23 +13,24 @@ const randomWithStep = (
 };
 
 export const useFetchReports = (): Report[] => {
-  const materials = useFetchMaterials().slice(0, 8);
+  const { data: materials} = useFetchMaterials('');
 
   const units = useFetchUnits();
 
-  const reports = materials.map((material, index) => ({
+  const reports = materials?.map((material, index) => ({
     material,
     items: units.map(unit => ({
       unit,
       types: [0, 1, 2, 3].map(reportType => ({
         id: reportType,
         comment: unit.description,
-        quantity: unit.id === 1 ? 0 : randomWithStep(0, 9999999, material.multiply)
+        quantity: unit.id === 1 ? 0 : randomWithStep(0, 9999999, material.multiply),
+        status: "Active"
       }))
     })),
     allocatedQuantity: null,
     comment: `${material.nickname} - ${index}`
-  }))
+  }));
 
-  return reports
+  return []
 }

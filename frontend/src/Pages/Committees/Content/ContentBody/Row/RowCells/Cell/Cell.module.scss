@@ -1,6 +1,6 @@
 @layer custom {
     :root {
-        --cell-width: 7rem;
+        --cell-width: 5rem;
         --cell-height: 1.8rem;
     }
 
@@ -11,12 +11,12 @@
         align-items: center;
         padding: 0;
 
-        &[data-subrow=false] {
+        &[data-subrow="false"] {
             margin-top: 1rem;
         }
-    }   
+    }
 
-    .Label{ 
+    .Label {
         font-size: 0.8rem;
     }
 }

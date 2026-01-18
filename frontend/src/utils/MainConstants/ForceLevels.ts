@@ -6,7 +6,7 @@ enum FORCE_LEVEL {
     GDUD
 };
 
-type REPORT_TYPES = {
+type UNIT_LEVEL = {
     TYPES: {
         [key in keyof typeof FORCE_LEVEL]: {
             id: FORCE_LEVEL;
@@ -21,7 +21,7 @@ type REPORT_TYPES = {
     isUnitChangeAllowed: (currentLevel: FORCE_LEVEL) => boolean;
 };
 
-export const FORCE_TYPES: REPORT_TYPES = {
+export const UNIT_LEVELS: UNIT_LEVEL = {
     TYPES: {
         MATKAL: { id: FORCE_LEVEL.MATKAL, text: 'מטכ"ל' },
         PIKUD: { id: FORCE_LEVEL.PIKUD, text: 'פיקוד' },
@@ -31,10 +31,10 @@ export const FORCE_TYPES: REPORT_TYPES = {
     },
     textFunctions: {
         getTextById: (id: FORCE_LEVEL) => {
-            return Object.values(FORCE_TYPES.TYPES).find(type => type.id === id)?.text ?? '';
+            return Object.values(UNIT_LEVELS.TYPES).find(type => type.id === id)?.text ?? '';
         },
         getIdByText: (text: string) => {
-            return Object.values(FORCE_TYPES.TYPES).find(type => type.text === text)?.id ?? 0;
+            return Object.values(UNIT_LEVELS.TYPES).find(type => type.text === text)?.id ?? 0;
         },
     },
     getNextLevel: (currentLevel: FORCE_LEVEL) => {

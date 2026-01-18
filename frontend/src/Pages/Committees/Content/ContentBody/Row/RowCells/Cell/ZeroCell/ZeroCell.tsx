@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react"
-import { ZChip } from "../../../../../../../../components/ZChip/ZChip"
+import { Chip } from "../../../../../../../../components/Chip/Chip"
 import { useReportTypeStore } from "../../../../../../../../zustand/reportType"
 import { REPORT_TYPES } from "../../../../../../../../utils/MainConstants/ReportTypes";
 import type { MouseEventHandler } from "react";
@@ -12,7 +12,7 @@ type ZeroCellProps = {
 export const ZeroCell = ({ onChipClick }: ZeroCellProps) => {
     const reportType = useReportTypeStore(s => s.reportType);
 
-    return <ZChip label={<Plus className={styles.Icon}/>}
+    return <Chip label={<Plus className={styles.Icon}/>}
         slotProps={{
             backgroundColor: REPORT_TYPES.colorsFunctions.getSecondary(reportType),
             classes: {

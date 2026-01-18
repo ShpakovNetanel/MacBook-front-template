@@ -53,6 +53,8 @@
     }
 
     .Item {
+        padding: 0.5rem 0.5rem;
+
         &[data-selected]::before,
         &[data-highlighted]::before {
             inset-inline: 0;

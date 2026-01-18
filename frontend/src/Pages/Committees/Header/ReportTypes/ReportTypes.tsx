@@ -1,4 +1,4 @@
-import { ZTabs } from "../../../../components/ZTabs/ZTabs";
+import { Tabs } from "../../../../components/Tabs/Tabs";
 import { REPORT_TYPES } from "../../../../utils/MainConstants/ReportTypes";
 import { useReportTypeStore } from "../../../../zustand/reportType";
 
@@ -13,7 +13,7 @@ export const ReportTypes = () => {
     }));
 
     return (
-        <ZTabs
+        <Tabs
             activeTab={reportType}
             setActiveTab={updateReportType}
             tabs={reportTypesTabs} />

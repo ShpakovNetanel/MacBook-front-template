@@ -1,4 +1,6 @@
-import { ZNumberField } from "../../../../../../../../components/ZNumberField/ZNumberField";
+import { NumberField } from "../../../../../../../../components/NumberField/NumberField";
+import { REPORT_TYPES } from "../../../../../../../../utils/MainConstants/ReportTypes";
+import { useReportTypeStore } from "../../../../../../../../zustand/reportType";
 import styles from './NumberedCell.module.scss';
 
 type NumberedCellProps = {
@@ -6,14 +8,15 @@ type NumberedCellProps = {
     multiply: number;
     updateReportChange: (quantity: number) => void;
     isCellOpened: boolean;
+    disabled: boolean;
 }
 
-export const NumberedCell = ({ quantity, multiply, updateReportChange, isCellOpened }: NumberedCellProps) => {
+export const NumberedCell = ({ quantity, multiply, updateReportChange, isCellOpened, disabled }: NumberedCellProps) => {
     const onQuantityChange = (value: number | null) => {
         updateReportChange(value ?? 0)
     }
 
-    return <ZNumberField
+    return <NumberField
         slotProps={{
             classes: {
                 Root: styles.Field,
@@ -21,8 +24,10 @@ export const NumberedCell = ({ quantity, multiply, updateReportChange, isCellOpe
                 Input: styles.Input,
                 Decrement: styles.Decrement,
                 Increment: styles.Increment,
+                Icon: styles.Icon
             }
         }}
+        disabled={disabled}
         data-border-error={quantity % multiply !== 0}
         data-cell-bolded={isCellOpened}
         onValueChange={onQuantityChange}
